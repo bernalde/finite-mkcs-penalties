@@ -1,0 +1,6 @@
+.lake/
+.lake-cache/
+comparator-local.json
+*.olean
+*.ilean
+*.trace

@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "package": "mkcs-penalties",
+  "status": "SUBMISSION_CANDIDATE_WITH_PINNED_FULL_PREFLIGHT_CALLER_NOT_EXECUTED",
+  "original_clean_export_commit": "46cacc06087c112b4145887f2b64be788c1177c2",
+  "files": [
+    {
+      "path": ".github/workflows/palomar-preflight.yml",
+      "sha256": "47b4a4fcd27b4a8068f08f23e0c15bc3eb38e20da1f6cb3b06abd96c3db57099",
+      "bytes": 836
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "26d76eff51fad00094f360f85c34c1ef126e174ae99bb9b7989f722e6b2cc419",
+      "bytes": 66
+    },
+    {
+      "path": "AxiomAudit.lean",
+      "sha256": "a8421bd928cdb9eeaf019d110f3dc589ea065241c0ac85d9d3d2c3588d6e5815",
+      "bytes": 88
+    },
+    {
+      "path": "Challenge.lean",
+      "sha256": "efa9d0d166a3bfe4978ec8ce9a9b00a65d9f06baaef8e58619e813a2abb58119",
+      "bytes": 7980
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "MkCSProofs/Boundary.lean",
+      "sha256": "a065fda1254a460293df11a8acccc2ad9b2239338941b89bd8d4abb3c4b735b1",
+      "bytes": 5463
+    },
+    {
+      "path": "MkCSProofs/Conflict.lean",
+      "sha256": "6ed7cfcfb7017cebbdbc71888b38cf1e3a1f1e4f31054797ef432cd6126ce819",
+      "bytes": 4705
+    },
+    {
+      "path": "MkCSProofs/Definitions.lean",
+      "sha256": "95e7529891dc569b333ce2029b3f8c446ef76cb71db0d98c06f7597f72aab35b",
+      "bytes": 7938
+    },
+    {
+      "path": "MkCSProofs/Nonlinear.lean",
+      "sha256": "6e1122a84fc51e5d10342c530e79ed2d8c8304d2b43d32190a646cbb27130c45",
+      "bytes": 7666
+    },
+    {
+      "path": "MkCSProofs/SlotSums.lean",
+      "sha256": "083ceaba0fed2d12f8c87317b975182df14423446f55b1a09e64d993aeb3e757",
+      "bytes": 9180
+    },
+    {
+      "path": "MkCSProofs/Slots.lean",
+      "sha256": "be0081637dd9dcb2920f96c613e0b9f1c5a4512a7db4ef345c8aa6ee8d2296d7",
+      "bytes": 9762
+    },
+    {
+      "path": "MkCSProofs.lean",
+      "sha256": "09c3d7627357b19029037c1db90e9987cfd9a2069879c1baf661bb5653862a34",
+      "bytes": 42
+    },
+    {
+      "path": "NOTICE.md",
+      "sha256": "3bb50c1d3f015c198cf5febacccecad20a9f2c0d51e32c41b22076f596bee769",
+      "bytes": 728
+    },
+    {
+      "path": "PREPARATION.md",
+      "sha256": "9444057e09344f75bc36e5ea06b7b7df9dbb2a0bc24e2e9ef08a0ad9decffcd5",
+      "bytes": 1351
+    },
+    {
+      "path": "PROVENANCE.md",
+      "sha256": "41363ae04715437ddb27aa30be7175e0bb0aec070f62d0be609fb62ae43b5555",
+      "bytes": 1831
+    },
+    {
+      "path": "README.md",
+      "sha256": "09b97ec54f5798b337cc4f1ec36ed382a8f2bb802bf6eb7fb59a4739d1c986a3",
+      "bytes": 4716
+    },
+    {
+      "path": "RELEASE-STATUS.md",
+      "sha256": "3d2efb96aad9eda3f306e583957d14759e676b4fd95f132ae6c08f693653ec9c",
+      "bytes": 1169
+    },
+    {
+      "path": "Solution.lean",
+      "sha256": "6a80bb8b0dd2d2719667af4ec57aa07dbbc329fbaed2cbc4606ab87ffa46b56f",
+      "bytes": 868
+    },
+    {
+      "path": "VERIFICATION.json",
+      "sha256": "c49acb88b29b4a646ae4d458e3b5da8e764589b7942600f43a9e74a0f646b24a",
+      "bytes": 2574
+    },
+    {
+      "path": "comparator.json",
+      "sha256": "391651e53c5745db67c4fa0edef6dc077b58c25bbb531aa15a8bc4c4aecb5a77",
+      "bytes": 235
+    },
+    {
+      "path": "formalization.yaml",
+      "sha256": "09ba0e1b226f9cd1b1908ad7f60ffa07b32321cdd1b931b26dd01d46dfb66b4f",
+      "bytes": 5541
+    },
+    {
+      "path": "lake-manifest.json",
+      "sha256": "bdd2efb3d9de8ff3b86c8d5318a2a8294c14277f1afef7ef708020b7b23e221a",
+      "bytes": 3167
+    },
+    {
+      "path": "lakefile.toml",
+      "sha256": "ff9a628596395c2a198003b4136edf28e4b7d26cd3b858aa9567a7e706161f25",
+      "bytes": 383
+    },
+    {
+      "path": "lean-toolchain",
+      "sha256": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+      "bytes": 25
+    },
+    {
+      "path": "scripts/verify.py",
+      "sha256": "0684e6b0f6e91db0af2f0c6b9673c1683f3df2bb99a3061b14edf812806008c9",
+      "bytes": 3085
+    },
+    {
+      "path": "sources.bib",
+      "sha256": "a748303aa281021edfdc3afa2d573b7110082c2e8632219294320aef2fe8b96d",
+      "bytes": 369
+    }
+  ],
+  "excluded": [
+    ".git/ and parent history",
+    ".lake/ and dependencies/build objects",
+    "thesis/article assets",
+    "raw private audit/reviewer/correspondence records"
+  ],
+  "schema_validation": "NOT_RUN_FOR_REFRESHED_METADATA",
+  "license": "Apache-2.0",
+  "service_submission_performed": false
+}

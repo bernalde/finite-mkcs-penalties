@@ -1,0 +1,52 @@
+{
+  "status": "Local mechanical verification passed; no Palomar submission or registration",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "compared_theorem": "PalomarMkCS.solution",
+  "source_input_sha256": {
+    "comparator.json": "391651e53c5745db67c4fa0edef6dc077b58c25bbb531aa15a8bc4c4aecb5a77",
+    "lake-manifest.json": "bdd2efb3d9de8ff3b86c8d5318a2a8294c14277f1afef7ef708020b7b23e221a",
+    "Solution.lean": "6a80bb8b0dd2d2719667af4ec57aa07dbbc329fbaed2cbc4606ab87ffa46b56f",
+    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
+    "MkCSProofs.lean": "09c3d7627357b19029037c1db90e9987cfd9a2069879c1baf661bb5653862a34",
+    "Challenge.lean": "efa9d0d166a3bfe4978ec8ce9a9b00a65d9f06baaef8e58619e813a2abb58119",
+    "AxiomAudit.lean": "a8421bd928cdb9eeaf019d110f3dc589ea065241c0ac85d9d3d2c3588d6e5815",
+    "lakefile.toml": "ff9a628596395c2a198003b4136edf28e4b7d26cd3b858aa9567a7e706161f25",
+    "MkCSProofs/Definitions.lean": "95e7529891dc569b333ce2029b3f8c446ef76cb71db0d98c06f7597f72aab35b",
+    "MkCSProofs/Boundary.lean": "a065fda1254a460293df11a8acccc2ad9b2239338941b89bd8d4abb3c4b735b1",
+    "MkCSProofs/Conflict.lean": "6ed7cfcfb7017cebbdbc71888b38cf1e3a1f1e4f31054797ef432cd6126ce819",
+    "MkCSProofs/Slots.lean": "be0081637dd9dcb2920f96c613e0b9f1c5a4512a7db4ef345c8aa6ee8d2296d7",
+    "MkCSProofs/Nonlinear.lean": "6e1122a84fc51e5d10342c530e79ed2d8c8304d2b43d32190a646cbb27130c45",
+    "MkCSProofs/SlotSums.lean": "083ceaba0fed2d12f8c87317b975182df14423446f55b1a09e64d993aeb3e757"
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "checks": [
+    {
+      "check": "build",
+      "exit_code": 0,
+      "elapsed_seconds": 31.3371173980413
+    },
+    {
+      "check": "axioms",
+      "exit_code": 0,
+      "elapsed_seconds": 5.202608164050616
+    },
+    {
+      "check": "comparator",
+      "exit_code": 0,
+      "elapsed_seconds": 38.33348335896153
+    }
+  ],
+  "kernels": [
+    "Lean",
+    "NanoDa",
+    "con-ron"
+  ],
+  "con_ron_checked_declarations": 10017,
+  "diagnostics": "Intentional Challenge sorry; preserved deprecation/linter warnings in source proofs; con-ron noted two Nat declarations hoisted and accepted the export.",
+  "metadata_status": "User confirmed Apache-2.0 for this proof package and David E. Bernal Neira formalization author/maintainer credit with AI disclosure; public release and registration not authorized."
+}

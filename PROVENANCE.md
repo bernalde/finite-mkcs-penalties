@@ -1,0 +1,9 @@
+# Proof provenance
+
+This pilot contains the substantive finite nonlinear MkCS proof development, rather than importing an unavailable private proof package. It ports five previously developed Lean4.19 source units: Chapter09, Chapter09Slots, Chapter09SlotSums, Chapter09Nonlinear and Chapter09NonlinearControls. The selected mathematical definitions and ten advertised statements are retained.
+
+The port moves their shared definitions into the small statement surface and a separate identical definition module for proofs. It adds the current module/public/expose interfaces, uses the current Real.Basic import path, and unfolds alpha explicitly at two existing simp endpoints. Comments describe the present local verification state. It omits unrelated arithmetic diagnostics and does not advertise linear/sequential algorithms or universal necessity thresholds. The local exact statement comparison and independent kernel replays pass after these compatibility changes.
+
+The cited Quintero/Bernal/Terlaky/Zuluaga article is the mathematical source, with an adapted corrected normalization/scope as stated in README and formalization.yaml. Bibliographic source authorship does not claim source-author endorsement of this formalization. Earlier automated reviews retain their scoped meanings; this pilot has no human peer-review or Palomar review claim.
+
+No private Git history, thesis or publisher documents, raw review transcripts, or private source-repository URL is part of this package. The user selected Apache-2.0 and confirmed the formalization author/maintainer credit with AI disclosure. The metadata successor is prepared for the requested submission workflow; see PREPARATION.md and RELEASE-STATUS.md. No hosted preflight, editorial decision or registration follows from preserving the earlier local proof verification.
