@@ -1,52 +1,343 @@
 {
-  "status": "Local mechanical verification passed; no Palomar submission or registration",
-  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
-  "mathlib_revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
-  "compared_theorem": "PalomarMkCS.solution",
-  "source_input_sha256": {
-    "comparator.json": "391651e53c5745db67c4fa0edef6dc077b58c25bbb531aa15a8bc4c4aecb5a77",
-    "lake-manifest.json": "bdd2efb3d9de8ff3b86c8d5318a2a8294c14277f1afef7ef708020b7b23e221a",
-    "Solution.lean": "6a80bb8b0dd2d2719667af4ec57aa07dbbc329fbaed2cbc4606ab87ffa46b56f",
-    "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c",
-    "MkCSProofs.lean": "09c3d7627357b19029037c1db90e9987cfd9a2069879c1baf661bb5653862a34",
-    "Challenge.lean": "efa9d0d166a3bfe4978ec8ce9a9b00a65d9f06baaef8e58619e813a2abb58119",
-    "AxiomAudit.lean": "a8421bd928cdb9eeaf019d110f3dc589ea065241c0ac85d9d3d2c3588d6e5815",
-    "lakefile.toml": "ff9a628596395c2a198003b4136edf28e4b7d26cd3b858aa9567a7e706161f25",
-    "MkCSProofs/Definitions.lean": "95e7529891dc569b333ce2029b3f8c446ef76cb71db0d98c06f7597f72aab35b",
-    "MkCSProofs/Boundary.lean": "a065fda1254a460293df11a8acccc2ad9b2239338941b89bd8d4abb3c4b735b1",
-    "MkCSProofs/Conflict.lean": "6ed7cfcfb7017cebbdbc71888b38cf1e3a1f1e4f31054797ef432cd6126ce819",
-    "MkCSProofs/Slots.lean": "be0081637dd9dcb2920f96c613e0b9f1c5a4512a7db4ef345c8aa6ee8d2296d7",
-    "MkCSProofs/Nonlinear.lean": "6e1122a84fc51e5d10342c530e79ed2d8c8304d2b43d32190a646cbb27130c45",
-    "MkCSProofs/SlotSums.lean": "083ceaba0fed2d12f8c87317b975182df14423446f55b1a09e64d993aeb3e757"
+  "schema": 1,
+  "state": "LOCAL_CHECKED_AGENT_REVIEWED_DOC_CLOSED",
+  "scope": "Completed bounded local checks, independent package/interface review and independent MKCS-DOC-01 closure of the retained ten-component nonlinear bundle and fourteen-component extension. Exact export/rights/privacy validation are separately recorded by the coordinator.",
+  "compared_targets": [
+    "PalomarMkCS.solution",
+    "PalomarMkCS.extension_solution"
+  ],
+  "expected_toolchain": "leanprover/lean4:v4.35.0",
+  "upstream_mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "source_copy_hashes": {
+    "Chapter09.lean": "b2ddd37756525b68bea9fe5556920970afd469142c5ff93479e44650f040801f",
+    "Chapter09Slots.lean": "8ccff73ba126807cfb1bb97cf2c8f1a03e98228b096d00534489b26417520f77",
+    "Chapter09SlotSums.lean": "c052a6dfa0b4fb9d0980941334c92f6a944a9254296ae341844d9a30d148493f",
+    "Chapter09Nonlinear.lean": "a17f7ca575faebd2a6b6b6c819feab52b81e026434371517b551af33a02b86a2",
+    "Chapter09NonlinearControls.lean": "c656b4eb4060bcbde1daca529deae8b53d436fcd39b269ef3d3bfce6fb00d3b2",
+    "Chapter09ConflictDeletion.lean": "ce88fe7d92e293ab1039236dc790ff62d97ff1b05b1f5a6bacd26365ab250ed8",
+    "Chapter09Sequential.lean": "844803fbfb9d1ba2b737548bf6d60f60ef23a8b572368d0dc4219b92f5a82113",
+    "Chapter09Linear.lean": "e7ee9e45256eafb3c47ab6ddc020206208b7c04d7e231986d3c7eebf377f21cf",
+    "Chapter09Sharpness.lean": "5aae1bd45adfbaada4447bc7b0215b55d3cb495bb6144f1f98fce83230549d8d",
+    "Chapter09SharpnessControls.lean": "fd3e9d3a377e5655aa967a13460f58e5fa03eab98f43feca548f927135194e3e",
+    "Chapter09SourceProcedure.lean": "e274cc32c8a6ef1e2c4dfd50544ea44a8e2a415ba84b768c0c8625ffac193f67"
   },
-  "axioms": [
-    "Classical.choice",
-    "Quot.sound",
-    "propext"
-  ],
-  "checks": [
-    {
-      "check": "build",
-      "exit_code": 0,
-      "elapsed_seconds": 31.3371173980413
+  "mechanical_verification": {
+    "retained_record": "PROJECT-S290 verification/mkcs02/result.json",
+    "receipt_sha256": "7fc943093c9e06dfae3bde695496840d9756dc4fc5262f2f5e838f046e0f9506",
+    "state": "PASS_BUILD_AXIOMS_SANDBOXED_COMPARATOR_LEAN_NANODA_CONRON",
+    "completed_utc": "2026-11-06T20:11:25.127733+00:00",
+    "actual_lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+    "source_build": "Candidate project sources built explicitly; unchanged exact local outputs and pinned upstream caches may be reused, with upstream cache mounted read-only",
+    "cold_build_claimed": false,
+    "serial_module_order": [
+      "Chapter09",
+      "Chapter09Slots",
+      "Chapter09SlotSums",
+      "Chapter09Nonlinear",
+      "Chapter09NonlinearControls",
+      "Chapter09ConflictDeletion",
+      "Chapter09Sequential",
+      "Chapter09Linear",
+      "Chapter09Sharpness",
+      "Chapter09SharpnessControls",
+      "Chapter09SourceProcedure",
+      "MkCSStatement",
+      "MkCSProofs",
+      "Challenge",
+      "Solution"
+    ],
+    "step_results": [
+      {
+        "label": "lean-version",
+        "exit_code": 0,
+        "elapsed_seconds": 0.05105475604068488,
+        "stdout_sha256": "eb22144228dd41cd51a0c84af4f976cd0cef473102dcf99b60be756b11f2b95a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09",
+        "exit_code": 0,
+        "elapsed_seconds": 1.8495570629602298,
+        "stdout_sha256": "b89fad24cdb6f858d1c87284e3170835c98e2fc3db0353ac697888dfec802dab",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09Slots",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7260344199603423,
+        "stdout_sha256": "52c0e46b044782cd46f1c843a8c632f1661434683e176d991bb7bc3437eface1",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09SlotSums",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7533546109916642,
+        "stdout_sha256": "4997dc78e9939ee9dd0bfbd6577927ca79850597a9bc10632e7f8dd6f5583742",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09Nonlinear",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7660316450055689,
+        "stdout_sha256": "2572cccb0f68a0783562b7c3520e5cf77ead0d63251829f71c8a111e3c831d81",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09NonlinearControls",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7504177460214123,
+        "stdout_sha256": "1712a63875fadb6075bf1920f057bb11939cf1588f9233ce5cc07cfaaa0d3aa8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09ConflictDeletion",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7620071090059355,
+        "stdout_sha256": "77ce02996e87affdc929f2d682a27c78de0f7cad1aa4f7127745cb1217758ee2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09Sequential",
+        "exit_code": 0,
+        "elapsed_seconds": 1.8063520221039653,
+        "stdout_sha256": "d0501f15e0057f88b2e8ecca733b65628598b276ffa57aea2c31c072ca72fd2d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09Linear",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7990712599130347,
+        "stdout_sha256": "026f2c9b812f3c396c7a9d9ee21a721cd5892b97f344f8252dab0d00fabf900b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09Sharpness",
+        "exit_code": 0,
+        "elapsed_seconds": 1.8000851590186357,
+        "stdout_sha256": "8c91c2789311b49cd06d464a3b4a65bc77c1d9bf7ee5572d68e9c59a2c3ef92f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09SharpnessControls",
+        "exit_code": 0,
+        "elapsed_seconds": 1.979611871065572,
+        "stdout_sha256": "08ac194c496a08cfeeb737ed95ae2a32307e701ab9e32a67878b30ef4ecf64bf",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Chapter09SourceProcedure",
+        "exit_code": 0,
+        "elapsed_seconds": 1.6117940159747377,
+        "stdout_sha256": "c769d295739c798fb311f5f2a58cf15bfc15bd71b68ec4191f09c0887da57ed4",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-MkCSStatement",
+        "exit_code": 0,
+        "elapsed_seconds": 1.739712712005712,
+        "stdout_sha256": "179f159688187534075624be5e6cad5836f72cbdc91b3ce70a8da51c836a5b9e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-MkCSProofs",
+        "exit_code": 0,
+        "elapsed_seconds": 1.689098792965524,
+        "stdout_sha256": "d1387fcc7a098ff9b8ab76aa0b9b1f121443aae9a5a31fdc485f98c661af27b8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Challenge",
+        "exit_code": 0,
+        "elapsed_seconds": 2.31387336703483,
+        "stdout_sha256": "2340d60f18ee59041ed41f1ea8a9f24669ec5d7a75b585360b9920cce57b1c4c",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "build-Solution",
+        "exit_code": 0,
+        "elapsed_seconds": 3.5847347950330004,
+        "stdout_sha256": "347eace248480fbe07ed16e446200d93df8920eff52a6302be3f2f78de811090",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "default-build",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7262166449800134,
+        "stdout_sha256": "862e1640128934fc9d8bf207611a545814ed9510cb883cca9307e31c6b9d1195",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "axioms",
+        "exit_code": 0,
+        "elapsed_seconds": 2.579200718086213,
+        "stdout_sha256": "c5feee83a99f7610d79fb5b59ecaf295983ca66ca5fad2691ae129bee73bd2a1",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "label": "comparator",
+        "exit_code": 0,
+        "elapsed_seconds": 25.48303084797226,
+        "stdout_sha256": "35ca49857e07c1210bc51020cbe0d8b8c7e8e30cc9c463b662a462d5c34cb3a7",
+        "stderr_sha256": "7d5914578867f7566e2fb88af36272824c6aa40b8e4828cfcea23485a4fa693c"
+      }
+    ],
+    "full_commands_and_logs": "Exact commands and hash-bound stdout/stderr remain in the coordinator-retained receipt; host-specific paths are not copied into this export.",
+    "actual_target_axioms": {
+      "PalomarMkCS.solution": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PalomarMkCS.extension_solution": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
-    {
-      "check": "axioms",
-      "exit_code": 0,
-      "elapsed_seconds": 5.202608164050616
+    "sorryAx_or_research_specific_axiom_in_compared_roots": false,
+    "source_route_axiom_census": "AxiomAudit also checked Chapter09.SourceProcedure.theorem_9_3_2_from_text with only Classical.choice, Quot.sound and propext.",
+    "comparator": {
+      "stdout_sha256": "35ca49857e07c1210bc51020cbe0d8b8c7e8e30cc9c463b662a462d5c34cb3a7",
+      "result": "Your solution is okay!",
+      "kernels_passed": [
+        "Lean default",
+        "NanoDa",
+        "con-ron"
+      ],
+      "con_ron_verified_declarations": 10732,
+      "local_configuration": "Explicit executable paths for external kernels were added locally; both full theorem targets, permitted axioms and definition comparison policy were unchanged. No definition exemption or skipped sandbox/kernel.",
+      "local_configuration_sha256": "92b490ca4ffd4d953fa55209e76bd61c35fd01fde22a647bb6608fe54c38e946"
     },
-    {
-      "check": "comparator",
-      "exit_code": 0,
-      "elapsed_seconds": 38.33348335896153
-    }
+    "source_header_scanner_sha256": "6919911f9905fcc9f01cac96e8c98a348a192a5550a10d127b0b3ced2d74bc5a",
+    "resources": {
+      "memory_max_bytes": 12884901888,
+      "swap_max_bytes": 0,
+      "cpu_max_quota_period": [
+        200000,
+        100000
+      ],
+      "memory_peak_bytes": 685047808,
+      "memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n"
+    },
+    "trust_limits": [
+      "Unchanged exact local outputs may be reused; pinned upstream caches were mounted read-only. This is not represented as a cold rebuild.",
+      "Ordinary compiler/runtime/cache and checker-binary trust remains; the independent reviewer did not rerun proof checks or rebuild checker binaries."
+    ],
+    "warning_limits": [
+      "Lean logs include linter and deliberate Challenge-placeholder warnings; this was not a warning-free run.",
+      "The con-ron Nat-operation hoisting notice is informational, not a proof rejection."
+    ]
+  },
+  "input_binding": {
+    "mechanically_checked_input_count": 34,
+    "basis": "The retained mkcs02 receipt hashes all 34 then-current non-cache inputs. This successor changes only documentary files; the twenty proof/compiler inputs below are byte-identical to those checked inputs.",
+    "unchanged_proof_and_compiler_inputs": {
+      "AxiomAudit.lean": "cc74ccd29bdf838dff1ce230666a22e9e35be84ea33ca78a28d3203de2c19c7b",
+      "Challenge.lean": "67b289870470498f8af981f9b538548fa372c9d8a68d1abb5f55acd4b70f2902",
+      "Chapter09.lean": "b2ddd37756525b68bea9fe5556920970afd469142c5ff93479e44650f040801f",
+      "Chapter09ConflictDeletion.lean": "ce88fe7d92e293ab1039236dc790ff62d97ff1b05b1f5a6bacd26365ab250ed8",
+      "Chapter09Linear.lean": "e7ee9e45256eafb3c47ab6ddc020206208b7c04d7e231986d3c7eebf377f21cf",
+      "Chapter09Nonlinear.lean": "a17f7ca575faebd2a6b6b6c819feab52b81e026434371517b551af33a02b86a2",
+      "Chapter09NonlinearControls.lean": "c656b4eb4060bcbde1daca529deae8b53d436fcd39b269ef3d3bfce6fb00d3b2",
+      "Chapter09Sequential.lean": "844803fbfb9d1ba2b737548bf6d60f60ef23a8b572368d0dc4219b92f5a82113",
+      "Chapter09Sharpness.lean": "5aae1bd45adfbaada4447bc7b0215b55d3cb495bb6144f1f98fce83230549d8d",
+      "Chapter09SharpnessControls.lean": "fd3e9d3a377e5655aa967a13460f58e5fa03eab98f43feca548f927135194e3e",
+      "Chapter09SlotSums.lean": "c052a6dfa0b4fb9d0980941334c92f6a944a9254296ae341844d9a30d148493f",
+      "Chapter09Slots.lean": "8ccff73ba126807cfb1bb97cf2c8f1a03e98228b096d00534489b26417520f77",
+      "Chapter09SourceProcedure.lean": "e274cc32c8a6ef1e2c4dfd50544ea44a8e2a415ba84b768c0c8625ffac193f67",
+      "MkCSProofs.lean": "b5f2d2da621bbe3e52291e9ad60dc438be25cec1e4fc105327026f04a2e66db1",
+      "MkCSStatement.lean": "63a1246bba88edb8e5cd5c01a3faf63d0da1a7171885298a7d9b672272bedbb5",
+      "Solution.lean": "d64ebd34ac2d5f7bf153bccb73d8958e02edf35f10d50aa6aef3d9452ec0acc1",
+      "comparator.json": "e8b13367ff4a9fff423652f79cf51b68bbdcf60a46a1435f2f5c54ef30b7a1b5",
+      "lake-manifest.json": "5d230550ce5cf6eb2b93ea95621379359c7c987a5f7fb5cf4204eccfbde998ed",
+      "lakefile.toml": "547b17f29d58189345840cd17b74fa381f9f9f5832a649ab7f7d61744a93579d",
+      "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    "additional_unchanged_check_inputs": {
+      "scripts/verify.py": "07d35195eb96fc50513696254743c38a5bc854d48df48a5369e38e9339168441",
+      ".github/workflows/palomar-preflight.yml": "47b4a4fcd27b4a8068f08f23e0c15bc3eb38e20da1f6cb3b06abd96c3db57099"
+    },
+    "all_lean_and_pins_lake_comparator_inputs_unchanged": true,
+    "proof_compiler_change_after_checks": false
+  },
+  "independent_review": {
+    "verdict": "SATISFACTORY",
+    "scope": [
+      "PalomarMkCS.solution: unchanged ten-component v1 bundle",
+      "PalomarMkCS.extension_solution: fourteen explicit qualified components"
+    ],
+    "report_record": "PROJECT-S290 review/MKCS-REVIEW.md",
+    "report_sha256": "924578d3e84f7e63df146df89c77c328889e8f165b624d301967c23f932b5598",
+    "findings_record": "PROJECT-S290 review/MKCS-FINDINGS.json",
+    "findings_sha256": "38996f68c439ec75a89bf0c2437de16652187ff10b2b5a9e5e8ad4ee7086d36c",
+    "mathematical_or_mechanical_mandatory_findings": [],
+    "documentary_finding": "MKCS-DOC-01 independently CLOSED; no mandatory finding remains.",
+    "requested_model": "Astra",
+    "requested_effort": "high",
+    "observed_runtime_model": null,
+    "observed_runtime_effort": null,
+    "reviewer_executed_proof_or_kernel_checks": false,
+    "checked_input_and_step_log_hashes": true,
+    "source_copies_match": 11,
+    "new_definition_slices_exact": 16,
+    "old_v1_bundle_literal_unchanged": true,
+    "challenge_and_statement_full_bodies_match": true,
+    "human_peer_review": false,
+    "coverage_limits": [
+      "Bounded package/interface review, not historical experiment or whole-thesis re-audit",
+      "No remote registry/commit/archive fetch or new rights adjudication",
+      "Retained original-source orientation and supplemental original nonlinear text; no new rendered-page campaign",
+      "Coordinator actual verification evidence independently inspected; no reviewer reruns or source rebuilds of kernel binaries"
+    ]
+  },
+  "historical_failed_attempt": {
+    "retained_record": "PROJECT-S290 verification/mkcs01/result.json",
+    "receipt_sha256": "0823ae6860ed615a62135f68a7a87fa26ea1ff967c856ff4d268ca5c8ff59e68",
+    "state": "FAILED",
+    "failure": "Challenge qLinear could not synthesize Fintype (LState G k) because the needed Pi instance was not publicly visible through transitive imports.",
+    "resolution": "Explicit public import Mathlib.Data.Fintype.Pi; the subsequent mkcs02 actual checks passed. No theorem type, hypothesis, conclusion, computational definition or canonical proof changed.",
+    "failed_attempt_preserved": true,
+    "failed_attempt_cost": "Retained in coordinator accounting history; native usage and attributable cost are not available to this documentary helper."
+  },
+  "challenge_auditability": {
+    "lines": 441,
+    "bytes": 19018,
+    "advisory_lines": 300,
+    "hard_line_limit": 1000,
+    "hard_byte_limit": 102400,
+    "above_advisory": true,
+    "below_stated_hard_limits": true,
+    "hosted_preflight_result_claimed": false
+  },
+  "telemetry": {
+    "native_tokens": null,
+    "estimated_cost_usd": null,
+    "actual_billed_usd": null,
+    "observed_helper_runtime_model": null,
+    "observed_helper_runtime_effort": null,
+    "coverage": "Unavailable to this helper; root owns reconciliation. Requested model/effort is not observed runtime identity. Per-step mechanical elapsed times are retained; total research wall time is not attributed."
+  },
+  "external_stages": {
+    "existing_v1_registration": "PALOMAR-2026-11-06-000016 v1 at commit 9a7a1a98809aeda6f5fcd67a262aa4a3f482ab6c remains separate",
+    "v2_public_commit_or_release": false,
+    "v2_hosted_preflight": false,
+    "v2_service_submission": false,
+    "v2_service_review": false,
+    "v2_registration": false
+  },
+  "pending": [
+    "separately authorized v2 public commit/release and hosted preflight",
+    "v2 service intake and delivered service review",
+    "separate decision on exact delivered-review registration"
   ],
-  "kernels": [
-    "Lean",
-    "NanoDa",
-    "con-ron"
-  ],
-  "con_ron_checked_declarations": 10017,
-  "diagnostics": "Intentional Challenge sorry; preserved deprecation/linter warnings in source proofs; con-ron noted two Nat declarations hoisted and accepted the export.",
-  "metadata_status": "User confirmed Apache-2.0 for this proof package and David E. Bernal Neira formalization author/maintainer credit with AI disclosure; public release and registration not authorized."
+  "documentary_closeout": {
+    "record": "PROJECT-S290 review/MKCS-DOC-CLOSEOUT.json",
+    "sha256": "812d58eed09a70051ff0813b4ebbdc423e3d842a01e1dd349696abb0209d2955",
+    "scope": "Eight-document successor independently checked against saved before/after; all20proof/compiler inputs unchanged."
+  },
+  "offline_metadata_validation": {
+    "record": "PROJECT-S290 metadata/mkcs01.json",
+    "sha256": "3ccfac508e5c5c44feb64409c369fba8d09dac3ae78116a1254ed35f749959d0",
+    "result": "PASS retained pinned official contract and v0.4schema; no live-current claim; subsequent status-only text successor to be revalidated"
+  }
 }

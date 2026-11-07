@@ -1,14 +1,21 @@
 module
 
-public import MkCSProofs.Conflict
+public import Chapter09
 
-/-! Compatibility port of Chapter09Slots.lean; exact retained proofs at accepted source pin.
-The completed proof is checked separately from the advertised Challenge. -/
 @[expose] public section
+
+/-! Literal finite vertex/color slots for thesis Chapter 9, PDF379–382.
+The graph stores each undirected edge once, oriented by the vertex order.
+No source theorem or optimum existence is assumed. -/
 noncomputable section
 open scoped BigOperators
 namespace Chapter09.Source
 
+abbrev Slot (n k : ℕ) := Fin n × Fin k
+
+structure Graph (n : ℕ) where
+  edges : Finset (Fin n × Fin n)
+  ordered : ∀ e ∈ edges, e.1 < e.2
 
 def Adj {n : ℕ} (G : Graph n) (i j : Fin n) : Prop :=
   (i, j) ∈ G.edges ∨ (j, i) ∈ G.edges
@@ -27,6 +34,26 @@ theorem edge_once {n : ℕ} (G : Graph n) (i j : Fin n) :
     · exact h
     · exact False.elim ((not_lt_of_gt hij) (G.ordered _ h))
 
+def flag {n k : ℕ} (S : Finset (Slot n k)) (i : Fin n) (r : Fin k) : ℝ :=
+  if (i, r) ∈ S then 1 else 0
+
+def row {n k : ℕ} (S : Finset (Slot n k)) (i : Fin n) : Finset (Fin k) :=
+  Finset.univ.filter (fun r => (i, r) ∈ S)
+
+def rowCount {n k : ℕ} (S : Finset (Slot n k)) (i : Fin n) : ℕ := (row S i).card
+
+def vertices {n k : ℕ} (S : Finset (Slot n k)) : Finset (Fin n) := S.image Prod.fst
+
+def spatialPairs {n : ℕ} (G : Graph n) (k : ℕ) : Finset (Slot n k × Slot n k) :=
+  Finset.univ.filter (fun e => (e.1.1, e.2.1) ∈ G.edges ∧ e.1.2 = e.2.2)
+
+def colorPairs (n k : ℕ) : Finset (Slot n k × Slot n k) :=
+  Finset.univ.filter (fun e => e.1.1 = e.2.1 ∧ e.1.2 < e.2.2)
+
+def conflictPairs {n : ℕ} (G : Graph n) (k : ℕ) := spatialPairs G k ∪ colorPairs n k
+
+def Feasible {n k : ℕ} (G : Graph n) (S : Finset (Slot n k)) : Prop :=
+  Chapter09.feasible (conflictPairs G k) S
 
 @[simp] theorem mem_spatialPairs {n k : ℕ} (G : Graph n) (e : Slot n k × Slot n k) :
     e ∈ spatialPairs G k ↔ (e.1.1, e.2.1) ∈ G.edges ∧ e.1.2 = e.2.2 := by
@@ -68,6 +95,10 @@ theorem feasible_iff {n k : ℕ} (G : Graph n) (S : Finset (Slot n k)) :
     · change i = j at hij
       subst j; exact (ne_of_lt hrp) (hc i r p hi hj)
 
+@[simp] theorem feasible_empty {n : ℕ} (G : Graph n) (k : ℕ) :
+    Feasible G (∅ : Finset (Slot n k)) := by
+  intro e _ h
+  exact Finset.notMem_empty e.1 h.1
 
 theorem feasible_rowCount {n k : ℕ} (G : Graph n) (S : Finset (Slot n k))
     (h : Feasible G S) (i : Fin n) : rowCount S i ≤ 1 := by
@@ -193,6 +224,11 @@ theorem feasible_uScore {n k : ℕ} (G : Graph n) (a b : ℝ) (S : Finset (Slot 
   Chapter09.feasible_score _ _ _ h
 
 /-- Maximum over an explicit nonempty finite domain; its witness is part of the API. -/
+def maxPoint {ι : Type*} (s : Finset ι) (hs : s.Nonempty) (f : ι → ℝ) : ι :=
+  Classical.choose (s.exists_max_image f hs)
+
+def maxOn {ι : Type*} (s : Finset ι) (hs : s.Nonempty) (f : ι → ℝ) : ℝ :=
+  f (maxPoint s hs f)
 
 theorem maxOn_attained {ι : Type*} (s : Finset ι) (hs : s.Nonempty) (f : ι → ℝ) :
     ∃ a ∈ s, f a = maxOn s hs f :=
@@ -202,6 +238,8 @@ theorem le_maxOn {ι : Type*} (s : Finset ι) (hs : s.Nonempty) (f : ι → ℝ)
     (a : ι) (ha : a ∈ s) : f a ≤ maxOn s hs f :=
   (Classical.choose_spec (s.exists_max_image f hs)).2 a ha
 
+def finiteMax {ι : Type*} [Fintype ι] [Nonempty ι] (f : ι → ℝ) : ℝ :=
+  maxOn Finset.univ Finset.univ_nonempty f
 
 theorem finiteMax_attained {ι : Type*} [Fintype ι] [Nonempty ι] (f : ι → ℝ) :
     ∃ a, f a = finiteMax f := by
@@ -211,6 +249,18 @@ theorem finiteMax_attained {ι : Type*} [Fintype ι] [Nonempty ι] (f : ι → �
 theorem le_finiteMax {ι : Type*} [Fintype ι] [Nonempty ι] (f : ι → ℝ) (a : ι) :
     f a ≤ finiteMax f := le_maxOn _ _ _ a (Finset.mem_univ _)
 
+def feasibleSelections {n : ℕ} (G : Graph n) (k : ℕ) : Finset (Finset (Slot n k)) := by
+  classical
+  exact Finset.univ.filter (Feasible G)
+
+@[simp] theorem mem_feasibleSelections {n k : ℕ} (G : Graph n) (S : Finset (Slot n k)) :
+    S ∈ feasibleSelections G k ↔ Feasible G S := by classical simp [feasibleSelections]
+
+theorem feasibleSelections_nonempty {n : ℕ} (G : Graph n) (k : ℕ) :
+    (feasibleSelections G k).Nonempty := ⟨∅, by simp⟩
+
+def alpha {n : ℕ} (G : Graph n) (k : ℕ) : ℝ :=
+  maxOn (feasibleSelections G k) (feasibleSelections_nonempty G k) (fun S => ((vertices S).card : ℝ))
 
 theorem alpha_attained {n : ℕ} (G : Graph n) (k : ℕ) :
     ∃ S : Finset (Slot n k), Feasible G S ∧ (S.card : ℝ) = alpha G k := by
@@ -226,3 +276,9 @@ theorem card_le_alpha {n k : ℕ} (G : Graph n) (S : Finset (Slot n k))
   simpa [alpha, feasible_vertex_card G S h] using he
 
 end Chapter09.Source
+#print axioms Chapter09.Source.edge_once
+#print axioms Chapter09.Source.spatial_color_disjoint
+#print axioms Chapter09.Source.feasible_iff_partial_coloring
+#print axioms Chapter09.Source.feasible_vertex_card
+#print axioms Chapter09.Source.alpha_attained
+#print axioms Chapter09.Source.card_le_alpha

@@ -1,20 +1,13 @@
-# Metadata successor, 5 November 2026
+# Historical preparation checkpoint — current-stage notice
 
-This source-only candidate is copied from the tracked files at clean export
-commit `46cacc06087c112b4145887f2b64be788c1177c2`. No Git metadata or parent history is included.
-Every Lean source, toolchain/dependency pin, Comparator configuration and executable
-verification/check script is byte-identical to that export. `VERIFICATION.json`
-is also byte-identical and remains a historical local mechanical receipt.
+The original snapshot below is preserved verbatim as a historical helper record. At that stage the helper ran no Lean/Lake/Comparator/kernel command or external request; its then-current NOT_RUN and pending-review statements must not be read as the present package status. The coordinator subsequently completed the actual bounded mkcs02 build, axiom and genuine Comparator/Lean/NanoDa/con-ron checks, and independent package/interface review returned SATISFACTORY. MKCS-DOC-01 was subsequently independently closed and retained pinned metadata/schema checks passed; proof/compiler inputs are unchanged. Exact export and rights/privacy validation are recorded separately by the coordinator. See [VERIFICATION.json](VERIFICATION.json) for exact receipts, review, failed-attempt history, warnings, resource/cache and telemetry limits. Version 2 public commit/release, hosted preflight, service intake/review and registration remain unperformed. The original helper PREPARATION.json remains historical too.
 
-The metadata refresh identifies David E. Bernal Neira as formalization author and
-responsible maintainer, preserves AI-use disclosure, uses the current source-type
-vocabulary, and applies the owner's existing Apache-2.0 software licence decision.
-The package contains substantive proof implementations; repository.role is omitted
-and uses the policy's substantive-development default, rather than advertising an
-unavailable external proof dependency. Cited papers/thesis are not redistributed.
+---
 
-Earlier pending-licence or publication-authorization fields in the unchanged
-historical verification receipt describe its issuance. They are not the current
-licence decision. This successor requires current metadata/source/privacy checks,
-exact-payload review/freeze and actual hosted preflight; none is claimed here.
-No statement, proof, scientific credit, solver campaign or registry verdict changes.
+# Local preparation status
+
+The two compared interfaces are prepared over eleven unchanged accepted canonical proof modules. The original nonlinear proposition bundle remains exact. A same-theorem source-route companion is included unchanged; the linear printed local slack map is not certified.
+
+No Lean/Lake/Comparator/kernel command or external request ran during this preparation. VERIFICATION.json deliberately says NOT_RUN. Prior source/migration acceptance is not a new packet certificate. Independent current Astra interface review and actual resource-bounded packet checks remain required.
+
+The intended routing is a version of existing PALOMAR-2026-11-06-000016, at the same source repository/root comparator.json identity. No publication, commit, preflight, intake, review or registration of this candidate has occurred.

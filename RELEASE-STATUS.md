@@ -1,20 +1,7 @@
-# Submission preparation status
+# Release status
 
-This candidate is prepared for the owner's requested registry-submission workflow.
-The exact original proof/compiler inputs and the earlier successful local
-mechanical verification receipt are preserved. The refreshed licence and metadata
-are a successor preparation, not a new theorem, build or scientific certification.
+LOCAL_CHECKED_AGENT_REVIEWED_DOCUMENTARY_SUCCESSOR. The exact mkcs02 proof/compiler inputs passed bounded local compilation, transitive axioms and genuine sandboxed Comparator with Lean, NanoDa and con-ron. Independent package/interface review was SATISFACTORY, with no mandatory mathematical or mechanical finding. MKCS-DOC-01 is independently closed and retained pinned official metadata/schema checks passed. The coordinator separately records exact source freeze and rights/privacy validation; see VERIFICATION.json.
 
-David E. Bernal Neira is the confirmed formalization author and responsible
-maintainer; AI assistance is disclosed. Project-owned software uses Apache-2.0,
-with dependencies and source publications retaining their separate rights.
+No candidate Git repository/public commit, remote publication, version 2 hosted preflight, service intake/review or registration has occurred. The existing registered PALOMAR-2026-11-06-000016 version 1 at commit 9a7a1a98809aeda6f5fcd67a262aa4a3f482ab6c remains a separate immutable source/review record. The proposed version 2 retains the same repository/root Comparator identity. Local agent review is not human peer review or a Palomar service verdict, and does not preapprove an unseen delivered review or registration digest.
 
-This preparation does not perform a public push, hosted preflight, Palomar
-editorial review, permanent registration or Reservoir indexing. Current
-policy/schema checks, exact-candidate review/freeze and the actual external
-submission steps remain to be recorded by the coordinator. Local green proof
-checks are not a registry editorial verdict or human peer review.
-
-The package has no parent private Git history, dependencies, objects, thesis or
-publisher assets, raw reviewer traces or private correspondence. See NOTICE.md,
-PROVENANCE.md or PROVENANCE.json, and PREPARATION.md.
+The 441-line/19,018-byte Challenge auditability advisory, actual local warnings, cache reuse and runtime/usage coverage limits remain disclosed. Historical preparation and the earlier mkcs01 failed attempt retain their original scopes. No proof, import, theorem, pin, Lake or Comparator input changed during this documentary closeout.

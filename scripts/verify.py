@@ -27,8 +27,11 @@ def main():
   if r.returncode:
    report['state']='FAILED';(out/'result.json').write_text(json.dumps(report,indent=2)+'\n');raise SystemExit(r.returncode)
   if name=='axioms':
-   match=re.search(r"depends on axioms: \[([^]]*)\]",stdout.read_text());assert match,'No completed axiom census'
-   axioms={s.strip()for s in match[1].split(',')if s.strip()};assert axioms<={'propext','Classical.choice','Quot.sound'},axioms;report['solution_axioms']=sorted(axioms)
+   rows=re.findall(r"'([^']+)' depends on axioms: \[([^]]*)\]",stdout.read_text())
+   observed={name:sorted(s.strip()for s in values.split(',')if s.strip())for name,values in rows if name in config['theorem_names']}
+   assert set(observed)==set(config['theorem_names']),'Missing compared-root axiom census'
+   assert all(set(values)<={'propext','Classical.choice','Quot.sound'}for values in observed.values()),observed
+   report['solution_axioms']=observed
  for name,digest in inputs.items():assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,('Input changed during verification',name)
  report['state']='PASS_REAL_BUILD_AXIOMS_SANDBOXED_COMPARATOR_AND_BUNDLED_KERNELS';(out/'result.json').write_text(json.dumps(report,indent=2)+'\n');print(report['state'])
 if __name__=='__main__':main()

@@ -1,3 +1,3 @@
 module
 
-public import MkCSProofs.Boundary
+public import MkCSStatement

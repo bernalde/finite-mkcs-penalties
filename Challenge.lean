@@ -3,6 +3,7 @@ module
 public import Mathlib.Data.Finset.Max
 public import Mathlib.Data.Fintype.Powerset
 public import Mathlib.Data.Fintype.Prod
+public import Mathlib.Data.Fintype.Pi
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
@@ -65,7 +66,9 @@ def Feasible {n k : ℕ} (G : Graph n) (S : Finset (Slot n k)) : Prop :=
   Chapter09.feasible (conflictPairs G k) S
 
 @[simp] theorem feasible_empty {n : ℕ} (G : Graph n) (k : ℕ) :
-    Feasible G (∅ : Finset (Slot n k)) := by simp [Feasible, Chapter09.feasible]
+    Feasible G (∅ : Finset (Slot n k)) := by
+  intro e _ h
+  exact Finset.notMem_empty e.1 h.1
 
 def maxPoint {ι : Type*} (s : Finset ι) (hs : s.Nonempty) (f : ι → ℝ) : ι :=
   Classical.choose (s.exists_max_image f hs)
@@ -129,6 +132,86 @@ def twoVertexEdge : Graph 2 :=
     decide⟩
 
 end Chapter09.Source.Controls
+
+
+namespace Chapter09.Source
+
+/-- One stored undirected edge and one color; edge membership remains part of the index. -/
+abbrev EdgeIndex {n : ℕ} (G : Graph n) (k : ℕ) :=
+  {e : Fin n × Fin n // e ∈ G.edges} × Fin k
+
+/-- Joint binary x,s,t domain: selected slots, Boolean edge slacks and Boolean vertex slacks. -/
+abbrev LState {n : ℕ} (G : Graph n) (k : ℕ) :=
+  Finset (Slot n k) × (EdgeIndex G k → Bool) × (Fin n → Bool)
+
+/-- Interpret a Boolean slack as the real number zero or one. -/
+def boolValue (b : Bool) : ℝ := if b = true then 1 else 0
+
+/-- Literal linear edge-row residual for one edge/color index. -/
+def edgeResidual {n k : ℕ} (G : Graph n) (S : Finset (Slot n k))
+    (s : EdgeIndex G k → Bool) (er : EdgeIndex G k) : ℝ :=
+  flag S er.1.val.1 er.2 + flag S er.1.val.2 er.2 + boolValue (s er) - 1
+
+/-- Sum of squared edge-row residuals over all stored edge/color indices. -/
+def edgePenalty {n k : ℕ} (G : Graph n) (S : Finset (Slot n k))
+    (s : EdgeIndex G k → Bool) : ℝ := ∑ er, edgeResidual G S s er ^ 2
+
+/-- Sum of squared vertex/color-count residuals with binary vertex slacks. -/
+def vertexPenalty {n k : ℕ} (S : Finset (Slot n k)) (t : Fin n → Bool) : ℝ :=
+  ∑ i, ((∑ r, flag S i r) + boolValue (t i) - 1) ^ 2
+
+/-- Literal linear QUBO reward minus the two squared-residual penalties. -/
+def lScore {n : ℕ} {k : ℕ} (G : Graph n) (c1 c2 : ℝ) (z : LState G k) : ℝ :=
+  (∑ i, ∑ r, flag z.1 i r ^ 2) - c1 * edgePenalty G z.1 z.2.1 -
+    c2 * vertexPenalty z.1 z.2.2
+
+/-- Actual attained finite maximum over the full joint binary slack domain. -/
+def qLinear {n : ℕ} (G : Graph n) (k : ℕ) (c1 c2 : ℝ) : ℝ :=
+  finiteMax (lScore (k := k) G c1 c2)
+
+/-- Global maximizer on all joint binary states, without fixing any slack assignment. -/
+def IsLMax {n k : ℕ} (G : Graph n) (c1 c2 : ℝ) (z : LState G k) : Prop :=
+  ∀ w : LState G k, lScore G c1 c2 w ≤ lScore G c1 c2 z
+
+/-- Every real array entry is exactly zero or one. -/
+def BinaryValues {α : Type*} (f : α → ℝ) : Prop := ∀ a, f a = 0 ∨ f a = 1
+
+/-- The same literal linear objective on separately quantified real x,s,t arrays. -/
+def arrayLScore {n k : ℕ} (G : Graph n) (c1 c2 : ℝ)
+    (x : Fin n → Fin k → ℝ) (s : EdgeIndex G k → ℝ) (t : Fin n → ℝ) : ℝ :=
+  (∑ i, ∑ r, x i r ^ 2) -
+    c1 * (∑ er : EdgeIndex G k, (x er.1.val.1 er.2 + x er.1.val.2 er.2 + s er - 1)^2) -
+    c2 * (∑ i, ((∑ r, x i r) + t i - 1)^2)
+
+end Chapter09.Source
+
+namespace Chapter09.ConflictDeletion
+variable {α : Type*} [DecidableEq α]
+
+def edgeStep (S : Finset α) (e : α × α) : Finset α :=
+  if e.1 ∈ S ∧ e.2 ∈ S then S.erase e.1 else S
+
+def edgeScan : List (α × α) → Finset α → Finset α
+  | [], S => S
+  | e :: es, S => edgeScan es (edgeStep S e)
+
+end Chapter09.ConflictDeletion
+
+namespace Chapter09.Sequential
+open Source ConflictDeletion
+variable {n k : ℕ}
+
+def rowStep (S : Finset (Slot n k)) (u : Slot n k) : Finset (Slot n k) :=
+  if u ∈ S ∧ ∃ p : Fin k, p ≠ u.2 ∧ (u.1,p) ∈ S then S.erase u else S
+
+def rowScan : List (Slot n k) → Finset (Slot n k) → Finset (Slot n k)
+  | [], S => S
+  | u :: us, S => rowScan us (rowStep S u)
+
+def algorithm (LE : List (Slot n k × Slot n k)) (LV : List (Slot n k))
+    (S : Finset (Slot n k)) : Finset (Slot n k) := rowScan LV (edgeScan LE S)
+
+end Chapter09.Sequential
 
 namespace PalomarMkCS
 open Chapter09.Source
@@ -197,6 +280,162 @@ def Statement : Prop :=
   StrictOptimizer ∧ OneColorValue ∧ OneColorStrict ∧ OneColorRepair ∧
   UnitEdgeTie ∧ HalfColorTie
 
+end PalomarMkCS
+
+namespace PalomarMkCS
+open Chapter09.Source
+
+/-- The full binary real-array domain attains exactly the finite Boolean-state optimum. -/
+def LinearBinaryMaximum : Prop :=
+  ∀ {n : ℕ} (G : Graph n) (k : ℕ) (c1 c2 : ℝ),
+    ∃ (x : Fin n → Fin k → ℝ) (s : EdgeIndex G k → ℝ) (t : Fin n → ℝ),
+      Binary x ∧ BinaryValues s ∧ BinaryValues t ∧
+      arrayLScore G c1 c2 x s t = qLinear G k c1 c2 ∧
+      ∀ (y : Fin n → Fin k → ℝ) (u : EdgeIndex G k → ℝ) (v : Fin n → ℝ),
+        Binary y → BinaryValues u → BinaryValues v →
+        arrayLScore G c1 c2 y u v ≤ qLinear G k c1 c2
+
+/-- Source strict linear theorem, including positive color count and arbitrary joint binary slacks. -/
+def LinearStrict : Prop :=
+  ∀ {n k : ℕ} (G : Graph n) (_hk : 0 < k) (c1 c2 : ℝ)
+    (hc1 : 1 < c1) (hc2 : 1 < c2),
+    qLinear G k c1 c2 = alpha G k ∧
+    ∀ z : LState G k, IsLMax G c1 c2 z →
+      Feasible G z.1 ∧ (z.1.card : ℝ) = alpha G k
+
+/-- Weak unit linear penalties give value equality; every optimizer is not asserted feasible. -/
+def LinearWeakValue : Prop :=
+  ∀ {n : ℕ} (G : Graph n) (k : ℕ) (c1 c2 : ℝ)
+    (hc1 : 1 ≤ c1) (hc2 : 1 ≤ c2),
+    qLinear G k c1 c2 = alpha G k
+
+/-- At one color the linear row-slack coefficient is still required nonnegative. -/
+def LinearOneColorValue : Prop :=
+  ∀ {n : ℕ} (G : Graph n) (c1 c2 : ℝ)
+    (hc1 : 1 ≤ c1) (hc2 : 0 ≤ c2),
+    qLinear G 1 c1 c2 = alpha G 1
+
+/-- Strict edge penalty and nonnegative row-slack penalty give one-color optimizer feasibility. -/
+def LinearOneColorStrict : Prop :=
+  ∀ {n : ℕ} (G : Graph n) (c1 c2 : ℝ)
+    (hc1 : 1 < c1) (hc2 : 0 ≤ c2) (z : LState G 1) (hz : IsLMax G c1 c2 z),
+    Feasible G z.1 ∧ (z.1.card : ℝ) = alpha G 1
+
+/-- Original unit-boundary nonlinear corollary with the actual exhaustive current-state Algorithm12. -/
+def NonlinearSourceAlgorithm : Prop :=
+  ∀ {n k : ℕ} (G : Graph n) (hk : 0 < k) (c1 c2 : ℝ)
+    (hc1 : 1 ≤ c1) (hc2 : 1 ≤ c2) (hunit : c1 = 1 ∨ c2 = 1)
+    (LE : List (Slot n k × Slot n k)) (LV : List (Slot n k))
+    (hs : ∀ e ∈ LE, e ∈ spatialPairs G k) (hE : ∀ e ∈ spatialPairs G k, e ∈ LE)
+    (hV : ∀ u : Slot n k, u ∈ LV) (S : Finset (Slot n k))
+    (hm : isNMax G c1 c2 S),
+    qNonlinear G k c1 c2 = alpha G k ∧
+    Feasible G (Chapter09.Sequential.algorithm LE LV S) ∧
+    ((Chapter09.Sequential.algorithm LE LV S).card : ℝ) = alpha G k
+
+/-- Original unit-boundary linear corollary with actual current-state Algorithm12. -/
+def LinearSourceAlgorithm : Prop :=
+  ∀ {n k : ℕ} (G : Graph n) (_hk : 0 < k) (c1 c2 : ℝ)
+    (hc1 : 1 ≤ c1) (hc2 : 1 ≤ c2) (_hunit : c1 = 1 ∨ c2 = 1)
+    (LE : List (Slot n k × Slot n k)) (LV : List (Slot n k))
+    (hs : ∀ e ∈ LE, e ∈ spatialPairs G k) (hE : ∀ e ∈ spatialPairs G k, e ∈ LE)
+    (hV : ∀ u : Slot n k, u ∈ LV) (z : LState G k) (hz : IsLMax G c1 c2 z),
+    qLinear G k c1 c2 = alpha G k ∧
+    Feasible G (Chapter09.Sequential.algorithm LE LV z.1) ∧
+    ((Chapter09.Sequential.algorithm LE LV z.1).card : ℝ) = alpha G k
+
+/-- Actual sequential nonlinear repair at the corrected weak ordered threshold 2*c2>=1. -/
+def NonlinearWeakAlgorithm : Prop :=
+  ∀ {n k : ℕ} (G : Graph n) (c1 c2 : ℝ)
+    (hc1 : 1 ≤ c1) (hc2 : 1 ≤ 2*c2)
+    (LE : List (Slot n k × Slot n k)) (LV : List (Slot n k))
+    (hs : ∀ e ∈ LE, e ∈ spatialPairs G k) (hE : ∀ e ∈ spatialPairs G k, e ∈ LE)
+    (hV : ∀ u : Slot n k, u ∈ LV) (S : Finset (Slot n k))
+    (hm : isNMax G c1 c2 S),
+    Feasible G (Chapter09.Sequential.algorithm LE LV S) ∧
+    nScore G c1 c2 S = ((Chapter09.Sequential.algorithm LE LV S).card : ℝ) ∧
+    ((Chapter09.Sequential.algorithm LE LV S).card : ℝ) = alpha G k ∧
+    ∀ T : Finset (Slot n k), Feasible G T →
+      (T.card : ℝ) ≤ ((Chapter09.Sequential.algorithm LE LV S).card : ℝ)
+
+/-- The one-color nonlinear sequential repair imposes no hypothesis on the color coefficient. -/
+def NonlinearOneColorAlgorithm : Prop :=
+  ∀ {n : ℕ} (G : Graph n) (c1 c2 : ℝ) (hc1 : 1 ≤ c1)
+    (LE : List (Slot n 1 × Slot n 1)) (LV : List (Slot n 1))
+    (hs : ∀ e ∈ LE, e ∈ spatialPairs G 1) (hE : ∀ e ∈ spatialPairs G 1, e ∈ LE)
+    (hV : ∀ u : Slot n 1, u ∈ LV) (S : Finset (Slot n 1))
+    (hm : isNMax G c1 c2 S),
+    Feasible G (Chapter09.Sequential.algorithm LE LV S) ∧
+    nScore G c1 c2 S = ((Chapter09.Sequential.algorithm LE LV S).card : ℝ) ∧
+    ((Chapter09.Sequential.algorithm LE LV S).card : ℝ) = alpha G 1
+
+/-- Actual sequential linear repair at both weak unit thresholds, for every joint maximizer. -/
+def LinearWeakAlgorithm : Prop :=
+  ∀ {n k : ℕ} (G : Graph n) (c1 c2 : ℝ)
+    (hc1 : 1 ≤ c1) (hc2 : 1 ≤ c2)
+    (LE : List (Slot n k × Slot n k)) (LV : List (Slot n k))
+    (hs : ∀ e ∈ LE, e ∈ spatialPairs G k) (hE : ∀ e ∈ spatialPairs G k, e ∈ LE)
+    (hV : ∀ u : Slot n k, u ∈ LV) (z : LState G k) (hz : IsLMax G c1 c2 z),
+    Feasible G (Chapter09.Sequential.algorithm LE LV z.1) ∧
+    lScore G c1 c2 z = ((Chapter09.Sequential.algorithm LE LV z.1).card : ℝ) ∧
+    ((Chapter09.Sequential.algorithm LE LV z.1).card : ℝ) = alpha G k
+
+/-- One-color linear sequential repair retains nonnegative row-slack coefficient. -/
+def LinearOneColorAlgorithm : Prop :=
+  ∀ {n : ℕ} (G : Graph n) (c1 c2 : ℝ)
+    (hc1 : 1 ≤ c1) (hc2 : 0 ≤ c2)
+    (LE : List (Slot n 1 × Slot n 1)) (LV : List (Slot n 1))
+    (hs : ∀ e ∈ LE, e ∈ spatialPairs G 1) (hE : ∀ e ∈ spatialPairs G 1, e ∈ LE)
+    (hV : ∀ u : Slot n 1, u ∈ LV) (z : LState G 1) (hz : IsLMax G c1 c2 z),
+    Feasible G (Chapter09.Sequential.algorithm LE LV z.1) ∧
+    lScore G c1 c2 z = ((Chapter09.Sequential.algorithm LE LV z.1).card : ℝ) ∧
+    ((Chapter09.Sequential.algorithm LE LV z.1).card : ℝ) = alpha G 1
+
+/-- For fixed positive k and positive coefficients, characterize value equality over every n and graph. -/
+def NonlinearUniversalValue : Prop :=
+  ∀ (k : ℕ) (hk : 0 < k) (c1 c2 : ℝ)
+    (_hc1 : 0 < c1) (_hc2 : 0 < c2),
+    (∀ (n : ℕ) (G : Graph n), qNonlinear G k c1 c2 = alpha G k) ↔
+      1 ≤ c1 ∧ (k = 1 ∨ 1/2 ≤ c2)
+
+/-- Universal linear value equality has the one-color exception and unit multi-color threshold. -/
+def LinearUniversalValue : Prop :=
+  ∀ (k : ℕ) (hk : 0 < k) (c1 c2 : ℝ)
+    (_hc1 : 0 < c1) (hc2 : 0 < c2),
+    (∀ (n : ℕ) (G : Graph n), qLinear G k c1 c2 = alpha G k) ↔
+      1 ≤ c1 ∧ (k = 1 ∨ 1 ≤ c2)
+
+/-- Same strict nonlinear source theorem through the accepted manuscript-route proof; no new theorem credit. -/
+def SourceRouteStrict : Prop :=
+  ∀ {n k : ℕ} (G : Graph n) (_hk : 0 < k)
+    (c1 c2 : ℝ) (hc1 : 1 < c1) (hc2 : 1 < c2),
+    qNonlinear G k c1 c2 = alpha G k ∧
+      ∀ S : Finset (Slot n k), isNMax G c1 c2 S →
+        Feasible G S ∧ (S.card : ℝ) = alpha G k
+
+/-- One coherent extension bundle; components are not independent research credits. -/
+def ExtensionStatement : Prop :=
+  LinearBinaryMaximum ∧
+  LinearStrict ∧
+  LinearWeakValue ∧
+  LinearOneColorValue ∧
+  LinearOneColorStrict ∧
+  NonlinearSourceAlgorithm ∧
+  LinearSourceAlgorithm ∧
+  NonlinearWeakAlgorithm ∧
+  NonlinearOneColorAlgorithm ∧
+  LinearWeakAlgorithm ∧
+  LinearOneColorAlgorithm ∧
+  NonlinearUniversalValue ∧
+  LinearUniversalValue ∧
+  SourceRouteStrict
+
+end PalomarMkCS
+
+namespace PalomarMkCS
+
 theorem solution : Statement := by sorry
+
+theorem extension_solution : ExtensionStatement := by sorry
 
 end PalomarMkCS

@@ -1,14 +1,20 @@
 module
 
-public import MkCSProofs.SlotSums
+public import Chapter09SlotSums
 
-/-! Compatibility port of Chapter09Nonlinear.lean; exact retained proofs at accepted source pin.
-The completed proof is checked separately from the advertised Challenge. -/
 @[expose] public section
+
+/-! Actual finite optima for the literal ordered-pair nonlinear formulation,
+thesis (9.19), (9.20), Theorem 9.3.2. The weak factor-two threshold is stated
+separately from the stronger printed sufficient hypotheses. The simultaneous
+repair reused below is an auxiliary construction, not source Algorithm 12. -/
 noncomputable section
 open scoped BigOperators
 namespace Chapter09.Source
 
+def arrayNScore {n k : ℕ} (G : Graph n) (c1 c2 : ℝ) (x : Fin n → Fin k → ℝ) : ℝ :=
+  (∑ i, ∑ r, x i r ^ 2) - c1 * (∑ e ∈ G.edges, ∑ r, x e.1 r * x e.2 r) -
+    c2 * (∑ i, ∑ r, ∑ p, if p ≠ r then x i r * x i p else 0)
 
 @[simp] theorem arrayNScore_flag {n k : ℕ} (G : Graph n) (c1 c2 : ℝ)
     (S : Finset (Slot n k)) : arrayNScore G c1 c2 (flag S) = nScore G c1 c2 S := rfl
@@ -18,6 +24,11 @@ theorem arrayNScore_selected {n k : ℕ} (G : Graph n) (c1 c2 : ℝ)
     nScore G c1 c2 (selected x) = arrayNScore G c1 c2 x := by
   rw [← arrayNScore_flag,flag_selected x hx]
 
+def qNonlinear {n : ℕ} (G : Graph n) (k : ℕ) (c1 c2 : ℝ) : ℝ :=
+  finiteMax (nScore (k := k) G c1 c2)
+
+def isNMax {n k : ℕ} (G : Graph n) (c1 c2 : ℝ) (S : Finset (Slot n k)) : Prop :=
+  ∀ T : Finset (Slot n k), nScore G c1 c2 T ≤ nScore G c1 c2 S
 
 theorem qNonlinear_attained {n : ℕ} (G : Graph n) (k : ℕ) (c1 c2 : ℝ) :
     ∃ S : Finset (Slot n k), nScore G c1 c2 S = qNonlinear G k c1 c2 :=
@@ -148,3 +159,11 @@ theorem corollary_9_3_1_value {n k : ℕ} (G : Graph n) (_hk : 0 < k) (c1 c2 : �
   qNonlinear_eq_alpha G k c1 c2 hc1 (by linarith)
 
 end Chapter09.Source
+#print axioms Chapter09.Source.qNonlinear_binary_maximum
+#print axioms Chapter09.Source.qNonlinear_eq_alpha
+#print axioms Chapter09.Source.nonlinear_optimizer_repair
+#print axioms Chapter09.Source.nonlinear_optimizer_strict
+#print axioms Chapter09.Source.qNonlinear_one_color
+#print axioms Chapter09.Source.nonlinear_one_color_strict
+#print axioms Chapter09.Source.theorem_9_3_2
+#print axioms Chapter09.Source.corollary_9_3_1_value

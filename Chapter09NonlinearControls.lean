@@ -1,15 +1,16 @@
 module
 
-public import MkCSProofs.Nonlinear
+public import Chapter09Nonlinear
 
-/-! Compatibility port of Chapter09NonlinearControls.lean; exact retained proofs at accepted source pin.
-The completed proof is checked separately from the advertised Challenge. -/
 @[expose] public section
+
+/-! Nonvacuity and boundary controls on the full graph/slot objects, not scalar surrogates. -/
 noncomputable section
 open scoped BigOperators
 namespace Chapter09.Source.Controls
 open Chapter09.Source
 
+def emptyGraph (n : ℕ) : Graph n := ⟨∅,by simp⟩
 
 theorem alpha_le_vertices {n : ℕ} (G : Graph n) (k : ℕ) : alpha G k ≤ n := by
   obtain ⟨S,hS,he⟩ := alpha_attained G k
@@ -56,6 +57,12 @@ theorem zero_vertices (G : Graph 0) (k : ℕ) (c1 c2 : ℝ) :
     rw [hS S] at hs
     simpa [nScore,reward,edgeProducts,orderedProducts,he] using hs.symm
 
+def twoVertexEdge : Graph 2 :=
+  ⟨{(0,1)},by
+    intro e he
+    have h : e = (0,1) := by simpa using he
+    subst e
+    decide⟩
 
 theorem edge_one_color_alpha : alpha twoVertexEdge 1 = 1 := by
   have hcard : ∀ S : Finset (Slot 2 1), Feasible twoVertexEdge S → S.card ≤ 1 := by
@@ -110,3 +117,9 @@ theorem half_color_global_tie :
     exact (by decide : (0 : Fin 2) ≠ 1) he
 
 end Chapter09.Source.Controls
+#print axioms Chapter09.Source.Controls.zero_vertices
+#print axioms Chapter09.Source.Controls.empty_graph_alpha
+#print axioms Chapter09.Source.Controls.enough_colors_alpha
+#print axioms Chapter09.Source.Controls.unit_edge_global_tie
+#print axioms Chapter09.Source.Controls.strict_edge_optimizer_exists
+#print axioms Chapter09.Source.Controls.half_color_global_tie

@@ -2,7 +2,8 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "PalomarMkCS.solution"
+    "PalomarMkCS.solution",
+    "PalomarMkCS.extension_solution"
   ],
   "definition_names": [],
   "permitted_axioms": [

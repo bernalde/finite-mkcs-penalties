@@ -1,76 +1,30 @@
-# Finite nonlinear MkCS penalty thresholds
+# Finite MkCS exact penalties and sequential repair
 
-**Submission candidate retaining the locally verified pilot.** This project adapts the finite nonlinear QUBO model in
-[Quintero, Bernal, Terlaky and Zuluaga (2022)](https://doi.org/10.1007/s11128-022-03421-z),
-*Characterization of QUBO reformulations for the maximum k-colorable subgraph
-problem*. It formalizes a corrected, explicitly normalized statement about the
-maximum k-colorable **vertex subset** of a finite graph. It makes no claim of a
-new mathematical result or of Palomar acceptance.
+This local version2 candidate extends the registered finite nonlinear MkCS package with the linear binary-slack model, actual sequential Algorithm12 and qualified universal value thresholds. It contains the substantive proof modules. It is not merely a wrapper around an unavailable private library.
 
-A graph stores each undirected edge once. Binary vertex/color slots can omit
-vertices; feasibility requires at most one color per selected vertex and no
-common color across an edge. The penalized objective is maximized over **all**
-binary slots. Its within-vertex color sum counts ordered distinct pairs, so its
-coefficient `c2` corresponds to coefficient `2*c2` for an unordered sum.
+**Current stage: bounded local checks passed; independent package/interface review was SATISFACTORY.** The two complete bundles passed compilation, transitive-axiom census and genuine sandboxed Comparator checks with Lean, NanoDa and con-ron. MKCS-DOC-01 is independently closed. The retained pinned official metadata contract and v0.4 schema checks passed; exact export and rights/privacy checks are recorded separately by the coordinator. The earlier registered version 1 remains a separate immutable record. Version 2 has no public commit/release, hosted preflight, service submission/review or registration.
 
-The single advertised theorem, `PalomarMkCS.solution`, bundles:
+For a finite undirected graph, a selection of vertex/color slots encodes a partial proper coloring when no stored edge has both endpoints in the same color and each vertex carries at most one color. `alpha` is the actual attained maximum cardinality of such a selection. The nonlinear score uses the literal ordered color-product sum. The linear score optimizes the selection together with arbitrary binary edge and row slacks.
 
-- an attained maximum over the full binary domain and the exact factor-two identity;
-- optimal-value equality and an auxiliary deletion repair when `c1 ≥ 1` and `2*c2 ≥ 1`;
-- feasibility of every global optimizer when `c1 > 1` and `2*c2 > 1`;
-- the one-color results, where `c2` may be any real;
-- two actual infeasible global optimizers at the unit-edge and half-color boundaries.
+- Nonlinear weak weights are `c1>=1, 2*c2>=1`; strict effective weights give optimizer feasibility. At one color, the nonlinear color coefficient is unrestricted.
+- Linear weak weights `c1,c2>=1` give value equality and sequential repair. Strict `c1,c2>1` make every joint maximizer’s selection feasible and optimal. At one color the row-slack coefficient remains nonnegative.
+- Algorithm12 runs actual current-state edge and row scans. Sound/exhaustive edge lists and exhaustive slot lists are explicit, with arbitrary order and repetitions. It is distinct from version1’s auxiliary simultaneous repair.
+- Universal value thresholds quantify over every finite graph and vertex count with fixed positive color count. They include the corrected nonlinear factor2 and one-color exception.
 
-The quantified empty-vertex and empty-color cases are retained. Weak value
-equality does not imply that every optimizer is feasible. The repair is an
-auxiliary simultaneous deletion construction, not sequential Algorithm12.
-Universal necessity/iff thresholds, the linear slack model, quantum behavior,
-embedding resources, solver performance and runtime claims are outside this pilot.
-The precise types and mathematical definitions are in `Challenge.lean`.
+The two compared declarations are `PalomarMkCS.solution` (unchanged original ten-component nonlinear proposition bundle) and `PalomarMkCS.extension_solution` (fourteen explicit extension components). They form one coherent MkCS family, not twenty-four newly claimed research contributions. The same-theorem strict nonlinear manuscript-route companion is a proof-route addition, not a new theorem.
 
-`Challenge.lean` has the deliberate statement placeholder used for comparison.
-The proof environment imports a separate `MkCSProofs.Definitions` with the same
-model and statement, then proves the exact advertised theorem in `Solution.lean`.
-It never imports the Challenge placeholder. Existing qualified CH09-S004 proofs
-were reused and mechanically adapted; the current native statement review is
-not a new external review or human peer review. Earlier Astra/Claude assessments
-retain their qualified source scopes and are not an endorsement of this public
-entry or of every assertion in the source article.
+The strict linear theorem uses the accepted canonical-lift replacement proof. The defective printed local slack update remains explicitly outside the certificate. Quantum, solver implementation, runtime, historical experiments and hardware claims are not advertised. Read [the source map](SOURCE-MAPPING.md), [metadata](formalization.yaml), [provenance](PROVENANCE.json) and exact statement definitions in [Challenge.lean](Challenge.lean).
 
-The local port build passed with Lean4.35.0 and mathlib
-`56a005855ea17e0b0958f73ec801ae140b0a1679`. The actual printed theorem axioms are
-`propext`, `Classical.choice` and `Quot.sound`. The final local verification
-passed: the genuine sandboxed Comparator matched the statement and completed
-proof, and Lean, NanoDa and con-ron accepted the solution. This is local mechanical
-verification; Palomar has not reviewed or registered this pilot.
+The eleven unchanged canonical source modules were matched to the already public [full Lean archive](https://bernalde.github.io/thesis_ai_remake/downloads/proof-sources-lean-4.35.tar.gz). This license covers the project-owned proof software and accompanying software documentation; cited thesis/paper assets and dependencies retain their terms and are not redistributed here.
 
-With Lean 4.35.0 and bubblewrap on PATH, resolve the pinned dependencies, obtain
-the actual import cache, then run the supplied verification script:
+## Reproduction and outstanding gates
 
-```sh
-MATHLIB_NO_CACHE_ON_UPDATE=1 lake update
-lake exe cache get Mathlib.Tactic Mathlib.Data.Finset.Max Mathlib.Data.Fintype.Powerset Mathlib.Data.Fintype.Prod Mathlib.Basic.Real.Basic Mathlib.Algebra.BigOperators.Group.Finset.Basic
-python3 scripts/verify.py --evidence-dir .lake/verification-01
-```
+Lean 4.35.0, Mathlib and all dependencies are pinned in the manifest. The Challenge uses Mathlib-only imports and has two deliberate theorem obligations. `Solution.lean` supplies proofs without importing Challenge. The actual `AxiomAudit.lean` census found only `Classical.choice`, `Quot.sound` and `propext` for both completed roots and the source-route theorem; no `sorryAx` or unproved research-specific axiom occurs in those roots. Comparator checked both complete bundles and all three kernels accepted; con-ron verified 10,732 declarations. The local external-kernel executable paths did not change the targets or permitted axioms. [VERIFICATION.json](VERIFICATION.json) binds the actual receipts, review and all unchanged proof/compiler inputs.
 
-Use a new evidence directory for each run. The script builds, prints the theorem's
-transitive axioms, and invokes the real sandboxed Comparator with the toolchain's
-bundled NanoDa and con-ron. It never disables the sandbox. The submitter
-`comparator.json` remains separate from the locally generated kernel configuration.
+Run verification only inside an operating-system resource scope with resident memory capped, swap disabled and bounded CPU. The completed coordinator checks used a 12 GiB limit, no swap and a two-CPU quota; recorded peak memory was 685,047,808 bytes with no OOM event. The 15 declared module builds, default build, axiom census and Comparator each exited 0. Unchanged exact local outputs and pinned upstream caches mounted read-only may be reused; this is not a cold rebuild claim. See `scripts/verify.py` for the build/census/genuine-Comparator sequence after arranging the bound.
 
-David E. Bernal Neira is the confirmed formalization author and responsible
-maintainer. The development and compatibility port used Codex automation;
-this credit does not claim every proof was manually written. Current root/native
-model identifiers and complete attributable costs are unavailable. The exact
-scientific correspondence and review limits remain explicit above.
+The Challenge has 441 lines and 19,018 bytes: above the 300-line auditability advisory and below the stated 1000-line/100 KiB hard limits. This arithmetic is not a hosted preflight result. Actual local logs contain linter and deliberate Challenge-placeholder warnings, so the run is not described as warning-free. The con-ron Nat-operation hoisting notice was informational. The earlier mkcs01 failure to expose the finite-function instance was resolved by the explicit public `Mathlib.Data.Fintype.Pi` import; its failed attempt remains in history/accounting.
 
-The pilot proof package is licensed under Apache-2.0; see LICENSE and NOTICE.md.
-That choice applies to this separate code package. It does not relicense the
-parent thesis archive, source publications, figures, data, or dependencies.
-The package includes no thesis/publisher PDF or private audit history.
+The independent review compared the full types, computational definitions, hypotheses, nonvacuity, source mapping and actual check evidence; it did not rerun proof/kernel checks or rebuild checker binaries. Its scope is this package/interface, with retained original-source orientation and supplemental nonlinear text; it is not human peer review, a whole-thesis re-audit, historical experiment authentication or a new rights adjudication. Requested Astra/high settings do not establish observed runtime model/effort. Native tokens, estimated cost, actual billing and total research wall time remain unavailable or unattributed.
 
-**Prepared for the requested submission workflow.** The proof inputs and historical
-VERIFICATION.json are unchanged. This metadata refresh creates no public repository,
-hosted Palomar service result, editorial verdict or registry registration. Current
-policy/schema checks and exact-candidate review remain for this successor. See
-PREPARATION.md and RELEASE-STATUS.md.
+Local mathematical review, documentary closeout and pinned metadata/schema checks are complete. Exact source freeze and rights/privacy validation are reported in the coordinator’s export receipt. Version 2 publication, hosted preflight and service intake/review follow the separately authorized reviewed bytes; permanent registration additionally needs the delivered review and its exact digest. None of those version 2 external stages has occurred.

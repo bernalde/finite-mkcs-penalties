@@ -1,0 +1,283 @@
+{
+  "status": "LOCAL_CHECKED_AGENT_REVIEWED_DOCUMENTARY_SUCCESSOR",
+  "source_copies": [
+    {
+      "source": "lean-modern/Chapter09.lean",
+      "candidate": "Chapter09.lean",
+      "sha256": "b2ddd37756525b68bea9fe5556920970afd469142c5ff93479e44650f040801f",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09Slots.lean",
+      "candidate": "Chapter09Slots.lean",
+      "sha256": "8ccff73ba126807cfb1bb97cf2c8f1a03e98228b096d00534489b26417520f77",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09Slots.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09SlotSums.lean",
+      "candidate": "Chapter09SlotSums.lean",
+      "sha256": "c052a6dfa0b4fb9d0980941334c92f6a944a9254296ae341844d9a30d148493f",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09SlotSums.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09Nonlinear.lean",
+      "candidate": "Chapter09Nonlinear.lean",
+      "sha256": "a17f7ca575faebd2a6b6b6c819feab52b81e026434371517b551af33a02b86a2",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09Nonlinear.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09NonlinearControls.lean",
+      "candidate": "Chapter09NonlinearControls.lean",
+      "sha256": "c656b4eb4060bcbde1daca529deae8b53d436fcd39b269ef3d3bfce6fb00d3b2",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09NonlinearControls.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09ConflictDeletion.lean",
+      "candidate": "Chapter09ConflictDeletion.lean",
+      "sha256": "ce88fe7d92e293ab1039236dc790ff62d97ff1b05b1f5a6bacd26365ab250ed8",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09ConflictDeletion.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09Sequential.lean",
+      "candidate": "Chapter09Sequential.lean",
+      "sha256": "844803fbfb9d1ba2b737548bf6d60f60ef23a8b572368d0dc4219b92f5a82113",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09Sequential.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09Linear.lean",
+      "candidate": "Chapter09Linear.lean",
+      "sha256": "e7ee9e45256eafb3c47ab6ddc020206208b7c04d7e231986d3c7eebf377f21cf",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09Linear.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09Sharpness.lean",
+      "candidate": "Chapter09Sharpness.lean",
+      "sha256": "5aae1bd45adfbaada4447bc7b0215b55d3cb495bb6144f1f98fce83230549d8d",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09Sharpness.lean"
+    },
+    {
+      "source": "lean-modern/Chapter09SharpnessControls.lean",
+      "candidate": "Chapter09SharpnessControls.lean",
+      "sha256": "fd3e9d3a377e5655aa967a13460f58e5fa03eab98f43feca548f927135194e3e",
+      "byte_identical": true,
+      "published_archive_member": "lean-modern/Chapter09SharpnessControls.lean"
+    },
+    {
+      "source": "companions/ch09-source-procedure/Chapter09SourceProcedure.lean",
+      "candidate": "Chapter09SourceProcedure.lean",
+      "sha256": "e274cc32c8a6ef1e2c4dfd50544ea44a8e2a415ba84b768c0c8625ffac193f67",
+      "byte_identical": true,
+      "published_archive_member": "companions/ch09-source-procedure/Chapter09SourceProcedure.lean"
+    }
+  ],
+  "original_nonlinear_bundle_sha256": "82499fa53ecb0894db07a197ee9052aa20a7f5de77a21122f99c217e6a9d866a",
+  "original_v1_commit": "9a7a1a98809aeda6f5fcd67a262aa4a3f482ab6c",
+  "existing_registration": "PALOMAR-2026-11-06-000016 v1",
+  "proposed_route": "New version of the same source repository/root Comparator identity, not a new result entry by default",
+  "original_bundle_components": 10,
+  "extension_components": 14,
+  "main_compared_declarations": [
+    "PalomarMkCS.solution",
+    "PalomarMkCS.extension_solution"
+  ],
+  "source_layout": "V1 renamed compatibility ports are replaced by unchanged canonical source files; the original PalomarMkCS proposition bundle remains exact. No canonical proof or accepted source is edited.",
+  "challenge_support_proof_delta": "feasible_empty uses the current canonical proof so alpha/nonempty support matches the unchanged canonical development; computational meanings and original proposition bundle unchanged.",
+  "same_theorem_companion": "Unchanged S280 Chapter09SourceProcedure; complete source strict theorem, same hypotheses/conclusion, corrected ordered factor2 and local single-slot contradiction; accepted alternatives remain in copied sources.",
+  "new_component_sources": [
+    {
+      "component": "LinearBinaryMaximum",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "qLinear_binary_maximum",
+      "scope_note": "The full binary real-array domain attains exactly the finite Boolean-state optimum."
+    },
+    {
+      "component": "LinearStrict",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "theorem_9_3_1",
+      "scope_note": "Source strict linear theorem, including positive color count and arbitrary joint binary slacks."
+    },
+    {
+      "component": "LinearWeakValue",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "qLinear_eq_alpha",
+      "scope_note": "Weak unit linear penalties give value equality; every optimizer is not asserted feasible."
+    },
+    {
+      "component": "LinearOneColorValue",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "qLinear_one_color",
+      "scope_note": "At one color the linear row-slack coefficient is still required nonnegative."
+    },
+    {
+      "component": "LinearOneColorStrict",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "linear_one_color_strict",
+      "scope_note": "Strict edge penalty and nonnegative row-slack penalty give one-color optimizer feasibility."
+    },
+    {
+      "component": "NonlinearSourceAlgorithm",
+      "source_module": "Chapter09Sequential",
+      "source_declaration": "corollary_9_3_1",
+      "scope_note": "Original unit-boundary nonlinear corollary with the actual exhaustive current-state Algorithm12."
+    },
+    {
+      "component": "LinearSourceAlgorithm",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "corollary_9_3_2",
+      "scope_note": "Original unit-boundary linear corollary with actual current-state Algorithm12."
+    },
+    {
+      "component": "NonlinearWeakAlgorithm",
+      "source_module": "Chapter09Sequential",
+      "source_declaration": "algorithm_nonlinear_repaired",
+      "scope_note": "Actual sequential nonlinear repair at the corrected weak ordered threshold 2*c2>=1."
+    },
+    {
+      "component": "NonlinearOneColorAlgorithm",
+      "source_module": "Chapter09Sequential",
+      "source_declaration": "algorithm_nonlinear_k1",
+      "scope_note": "The one-color nonlinear sequential repair imposes no hypothesis on the color coefficient."
+    },
+    {
+      "component": "LinearWeakAlgorithm",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "algorithm_linear",
+      "scope_note": "Actual sequential linear repair at both weak unit thresholds, for every joint maximizer."
+    },
+    {
+      "component": "LinearOneColorAlgorithm",
+      "source_module": "Chapter09Linear",
+      "source_declaration": "algorithm_linear_one_color",
+      "scope_note": "One-color linear sequential repair retains nonnegative row-slack coefficient."
+    },
+    {
+      "component": "NonlinearUniversalValue",
+      "source_module": "Chapter09SharpnessControls",
+      "source_declaration": "nonlinear_universal_value_iff",
+      "scope_note": "For fixed positive k and positive coefficients, characterize value equality over every n and graph."
+    },
+    {
+      "component": "LinearUniversalValue",
+      "source_module": "Chapter09SharpnessControls",
+      "source_declaration": "linear_universal_value_iff",
+      "scope_note": "Universal linear value equality has the one-color exception and unit multi-color threshold."
+    },
+    {
+      "component": "SourceRouteStrict",
+      "source_module": "Chapter09SourceProcedure",
+      "source_declaration": "theorem_9_3_2_from_text",
+      "scope_note": "Same strict nonlinear source theorem through the accepted manuscript-route proof; no new theorem credit."
+    }
+  ],
+  "no_publication": true,
+  "no_build_or_axiom_or_comparator_run": false,
+  "parent_acceptance": "Bounded local mechanical checks passed; independent package/interface review was SATISFACTORY; MKCS-DOC-01 independently CLOSED; retained pinned official metadata/schema checks passed. Exact export and rights/privacy validation are recorded separately by the coordinator. No v2 public/hosted/service/registration stage has occurred.",
+  "published_source_archive": "https://bernalde.github.io/thesis_ai_remake/downloads/proof-sources-lean-4.35.tar.gz",
+  "all_11_source_copies_match_published_archive": true,
+  "chapter_source_module_count": 11,
+  "challenge_public_import_requirement": "Mathlib.Data.Fintype.Pi is explicitly public-imported for Pi.instFintype on the full EdgeIndex-to-Bool and Fin n-to-Bool slack arrays. Merely reaching the module through private transitive imports did not expose the instance. This changes no type, domain, theorem assumption/conclusion or canonical source.",
+  "historical_preparation": {
+    "helper_ran_no_proof_tools_or_external_requests": true,
+    "record": "PREPARATION.md preserves the original preparation snapshot; the separate helper PREPARATION.json remains historical.",
+    "subsequent_stage": "Coordinator later completed actual bounded mkcs02 checks; independent reviewer inspected exact evidence without rerunning proof tools."
+  },
+  "auditability_advisory": "Challenge has 441 lines/19,018 bytes, above the 300-line advisory and below the stated 1000-line/100 KiB limits; not a hosted-preflight result. Local logs contain linter and intentional Challenge-placeholder warnings; no warning-free claim.",
+  "current_verification": {
+    "retained_record": "PROJECT-S290 verification/mkcs02/result.json",
+    "receipt_sha256": "7fc943093c9e06dfae3bde695496840d9756dc4fc5262f2f5e838f046e0f9506",
+    "state": "PASS_BUILD_AXIOMS_SANDBOXED_COMPARATOR_LEAN_NANODA_CONRON",
+    "comparator_stdout_sha256": "35ca49857e07c1210bc51020cbe0d8b8c7e8e30cc9c463b662a462d5c34cb3a7",
+    "kernels": [
+      "Lean default",
+      "NanoDa",
+      "con-ron"
+    ],
+    "actual_target_axioms": {
+      "PalomarMkCS.solution": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PalomarMkCS.extension_solution": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "unchanged_proof_and_compiler_inputs": {
+      "AxiomAudit.lean": "cc74ccd29bdf838dff1ce230666a22e9e35be84ea33ca78a28d3203de2c19c7b",
+      "Challenge.lean": "67b289870470498f8af981f9b538548fa372c9d8a68d1abb5f55acd4b70f2902",
+      "Chapter09.lean": "b2ddd37756525b68bea9fe5556920970afd469142c5ff93479e44650f040801f",
+      "Chapter09ConflictDeletion.lean": "ce88fe7d92e293ab1039236dc790ff62d97ff1b05b1f5a6bacd26365ab250ed8",
+      "Chapter09Linear.lean": "e7ee9e45256eafb3c47ab6ddc020206208b7c04d7e231986d3c7eebf377f21cf",
+      "Chapter09Nonlinear.lean": "a17f7ca575faebd2a6b6b6c819feab52b81e026434371517b551af33a02b86a2",
+      "Chapter09NonlinearControls.lean": "c656b4eb4060bcbde1daca529deae8b53d436fcd39b269ef3d3bfce6fb00d3b2",
+      "Chapter09Sequential.lean": "844803fbfb9d1ba2b737548bf6d60f60ef23a8b572368d0dc4219b92f5a82113",
+      "Chapter09Sharpness.lean": "5aae1bd45adfbaada4447bc7b0215b55d3cb495bb6144f1f98fce83230549d8d",
+      "Chapter09SharpnessControls.lean": "fd3e9d3a377e5655aa967a13460f58e5fa03eab98f43feca548f927135194e3e",
+      "Chapter09SlotSums.lean": "c052a6dfa0b4fb9d0980941334c92f6a944a9254296ae341844d9a30d148493f",
+      "Chapter09Slots.lean": "8ccff73ba126807cfb1bb97cf2c8f1a03e98228b096d00534489b26417520f77",
+      "Chapter09SourceProcedure.lean": "e274cc32c8a6ef1e2c4dfd50544ea44a8e2a415ba84b768c0c8625ffac193f67",
+      "MkCSProofs.lean": "b5f2d2da621bbe3e52291e9ad60dc438be25cec1e4fc105327026f04a2e66db1",
+      "MkCSStatement.lean": "63a1246bba88edb8e5cd5c01a3faf63d0da1a7171885298a7d9b672272bedbb5",
+      "Solution.lean": "d64ebd34ac2d5f7bf153bccb73d8958e02edf35f10d50aa6aef3d9452ec0acc1",
+      "comparator.json": "e8b13367ff4a9fff423652f79cf51b68bbdcf60a46a1435f2f5c54ef30b7a1b5",
+      "lake-manifest.json": "5d230550ce5cf6eb2b93ea95621379359c7c987a5f7fb5cf4204eccfbde998ed",
+      "lakefile.toml": "547b17f29d58189345840cd17b74fa381f9f9f5832a649ab7f7d61744a93579d",
+      "lean-toolchain": "ca5f1f601d34c49079e38d7e7041eb0f2a9c227fbc1df0f404820069a052330c"
+    },
+    "all_lean_and_pins_lake_comparator_inputs_unchanged": true,
+    "cold_build_claimed": false,
+    "cache_reuse": "Candidate project sources built explicitly; unchanged exact local outputs and pinned upstream caches may be reused, with upstream cache mounted read-only"
+  },
+  "independent_review": {
+    "verdict": "SATISFACTORY",
+    "scope": [
+      "PalomarMkCS.solution: unchanged ten-component v1 bundle",
+      "PalomarMkCS.extension_solution: fourteen explicit qualified components"
+    ],
+    "report_sha256": "924578d3e84f7e63df146df89c77c328889e8f165b624d301967c23f932b5598",
+    "findings_sha256": "38996f68c439ec75a89bf0c2437de16652187ff10b2b5a9e5e8ad4ee7086d36c",
+    "requested_model": "Astra",
+    "requested_effort": "high",
+    "observed_runtime_model": null,
+    "observed_runtime_effort": null,
+    "reviewer_executed_proof_or_kernel_checks": false,
+    "human_peer_review": false,
+    "documentary_closeout": "MKCS-DOC-01 independently CLOSED.",
+    "coverage_limits": [
+      "Bounded package/interface review, not historical experiment or whole-thesis re-audit",
+      "No remote registry/commit/archive fetch or new rights adjudication",
+      "Retained original-source orientation and supplemental original nonlinear text; no new rendered-page campaign",
+      "Coordinator actual verification evidence independently inspected; no reviewer reruns or source rebuilds of kernel binaries"
+    ]
+  },
+  "historical_failed_attempt": {
+    "record": "PROJECT-S290 verification/mkcs01/result.json",
+    "receipt_sha256": "0823ae6860ed615a62135f68a7a87fa26ea1ff967c856ff4d268ca5c8ff59e68",
+    "failure": "Missing public finite-function instance visibility in Challenge qLinear; resolved by existing explicit public Mathlib.Data.Fintype.Pi import before successful mkcs02.",
+    "failed_attempt_and_usage_history_retained": true
+  },
+  "v2_external_stages": {
+    "public_commit_or_release": false,
+    "hosted_preflight": false,
+    "service_submission": false,
+    "service_review": false,
+    "registration": false
+  },
+  "telemetry": {
+    "native_tokens": null,
+    "estimated_cost_usd": null,
+    "actual_billed_usd": null,
+    "coverage": "Unavailable to this helper; coordinator owns accounting and failed-attempt reconciliation. Requested model/effort is not observed runtime identity."
+  }
+}

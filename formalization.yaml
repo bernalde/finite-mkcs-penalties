@@ -1,15 +1,16 @@
 version: v0.4
 project:
-  name: Finite nonlinear MkCS exact penalty thresholds
-  description: 'An adapted finite nonlinear QUBO formalization for the maximum k-colorable vertex-subset
-    problem: binary-domain attainment, ordered color-pair normalization, weak optimal-value equality
-    with auxiliary repair, strict optimizer feasibility, the one-color exception and attained boundary
-    ties.'
+  name: Finite MkCS exact penalties, universal thresholds and sequential repair
+  description: A finite-graph formalization of nonlinear and linear QUBO penalties for the maximum k-colorable
+    vertex-subset problem. It retains the earlier nonlinear interface and adds jointly optimized binary
+    slack arrays, exact sequential feasibility repair, strict versus weak penalty guarantees, one-color
+    exceptions and universal value thresholds. An unchanged companion follows the manuscript’s strict
+    nonlinear single-slot-deletion proof.
   authors:
   - David E. Bernal Neira
-  license: Apache-2.0
   responsible_maintainers:
   - David E. Bernal Neira
+  license: Apache-2.0
 classification:
   arxiv:
   - math.OC
@@ -18,6 +19,18 @@ classification:
   - 90C27
   - 90C20
 sources:
+- title: Modern computational approaches to nonlinear discrete optimization and applications in process
+    systems engineering
+  authors:
+  - David E. Bernal Neira
+  type: other
+  relationship: adapts
+  location: 'Carnegie Mellon University Ph.D. thesis (2021), Chapter9, physical PDF381–390: Algorithm12,
+    equations9.9–9.23, Theorems9.3.1–2, Corollaries9.3.1–2, Propositions9.3.1–2.'
+  note: Primary source version for the correspondence. The original Chapter9 TeX is absent; recovered
+    source extraction is not represented as an original archive member. The public package cites source
+    documents rather than redistributing them. Exact repairs, proof-route changes and retained hypotheses
+    are described in SOURCE-MAPPING.md.
 - title: Characterization of QUBO reformulations for the maximum k-colorable subgraph problem
   authors:
   - Rodolfo Quintero
@@ -26,85 +39,117 @@ sources:
   - Luis F. Zuluaga
   id: doi:10.1007/s11128-022-03421-z
   type: paper
-  location: https://link.springer.com/article/10.1007/s11128-022-03421-z
   relationship: adapts
-  note: Published in 2022. The pilot uses the corrected finite nonlinear vertex/color-slot model
-    with an explicit ordered color sum. It separates weak value/repair guarantees from strict optimizer
-    feasibility; it does not claim a verbatim formalization of every source statement or source
-    author endorsement. No source article or publisher PDF is redistributed.
+  location: https://link.springer.com/article/10.1007/s11128-022-03421-z
+  note: Joint source research underlying Chapter9. This version does not assert a verbatim formalization
+    of every published statement, unchanged-paper certification, source-author endorsement or a formal
+    correction decision. No publisher asset is redistributed.
+related_formalizations:
+- id: https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-06-000016&version=1
+  relationship: builds-on
+  note: Proposed local version2 extension of the same repository/root Comparator identity. The registered
+    version 1 nonlinear proposition bundle is preserved. Bounded local compilation, axiom census and genuine
+    Comparator/Lean/NanoDa/con-ron checks passed, and independent agent review was SATISFACTORY. This
+    documentary closeout is independently complete; version 2 has not been publicly released, hosted-checked,
+    submitted, service-reviewed or registered.
 status:
-  scope: One nonlinear finite-graph family only. Weak bounds are c1 >= 1 and 2*c2 >= 1; strict bounds
-    are c1 > 1 and 2*c2 > 1. At k = 1, c2 is any real. Full binary maxima include the quantified
-    degenerate n/k domains. Two boundary controls are actual infeasible global maxima. The repair
-    is auxiliary simultaneous deletion, not sequential Algorithm12. Universal necessity/iff results,
-    the linear slack formulation, quantum/embedding, solver performance, and runtime claims are
-    not included.
-  sorry_count: 0
-  sorry_in_definitions: 0
-  axioms:
-  - propext
-  - Classical.choice
-  - Quot.sound
+  scope: Finite maximum k-colorable vertex-subset QUBO models with explicit binary domains. The original
+    nonlinear ten-component interface is unchanged. The extension adds full jointly optimized binary x,s,t
+    linear maxima, strict linear feasibility, weak value/actual sequential repair, one-color branches
+    and corrected universal value thresholds over all finite graphs. Algorithm12 is an actual two-pass
+    current-state scan with a sound/exhaustive edge list and exhaustive slot list; arbitrary order and
+    repetitions are retained. The nonlinear color product is ordered, so its effective unordered coefficient
+    is2*c2. The same strict nonlinear theorem also has the accepted manuscript-route single-slot-deletion
+    proof. The printed local linear slack-update map remains defective; the linear proof uses canonical
+    lifts and explicitly does not claim to verify that map. No quantum/software/runtime or empirical conclusion
+    is included.
+  package_verification: PASS_BUILD_AXIOMS_SANDBOXED_COMPARATOR_LEAN_NANODA_CONRON in the retained mkcs02
+    receipt; both full compared roots use only Classical.choice, Quot.sound and propext, with no sorryAx
+    or unproved research-specific axiom. Independent bounded package/interface review was SATISFACTORY.
+    MKCS-DOC-01 is independently closed; retained pinned metadata/schema checks passed. Exact source export and rights/privacy validation are separately recorded.
+    All Lean sources, toolchain/dependency pins, Lake files and comparator.json retain their checked
+    hashes; see VERIFICATION.json. No version 2 public/hosted/service/registration result is claimed.
   main_results:
   - declaration: PalomarMkCS.solution
     file: Solution.lean
-    sorry_count: 0
-    axioms:
-    - propext
-    - Classical.choice
-    - Quot.sound
     comparator_config: comparator.json
-    literature_dependencies: []
+    note: Original nonlinear ten-component bundle; not ten new research contributions.
+  - declaration: PalomarMkCS.extension_solution
+    file: Solution.lean
+    comparator_config: comparator.json
+    note: Fourteen explicit extension components in one coherent family; includes a same-theorem proof-route
+      comparison, not a new theorem credit.
 automation:
   methods:
   - method: agent
     models: []
     framework: Codex
-    tool_setup: Coordinator-directed source extraction, statement/provenance checks and porting
-      of existing Lean proofs; local Lean/mathlib build and actual axiom inspection. No solver or
-      numerical campaign supports the theorem.
+    tool_setup: Historical helper preparation copied eleven exact accepted published modules and added
+      independent statement definitions and conjunction wrappers without running proof tools. The
+      coordinator subsequently completed bounded local builds, transitive axioms and genuine sandboxed
+      Comparator with Lean, NanoDa and con-ron. Unchanged exact local outputs and pinned read-only
+      upstream caches may be reused; no cold rebuild is claimed. The independent reviewer inspected
+      the exact source and actual receipts without rerunning proof/kernel checks. This closeout changes
+      documents only; no external service was run.
+    prompting_notes: Preserve source hypotheses and complete conclusions; distinguish canonical-lift replacement
+      proof, actual current-state sequential scan and accepted same-theorem manuscript-route companion.
     cost:
-      wall_time: not attributed to this pilot
-      spend_usd: unknown; native overlap and billing unavailable
-      hardware: local Lean build environment
-    prompting_notes: Preserve exact accepted finite hypotheses and proofs; expose ordered pair normalization;
-      distinguish weak equality/repair from strict optimizer feasibility; retain k = 1 and attained
-      boundary ties.
-  spend_usd: unknown; no attributable complete total
-  notes: Prior proofs and qualified source evidence are reused at their recorded scopes. Codex automation
-    and AI assistance are disclosed; this is not a claim of exclusively manual proof authorship.
-    David E. Bernal Neira is the confirmed formalization author and responsible maintainer. Project-owned
-    proof code, tools and accompanying software documentation are licensed Apache-2.0 under the
-    owner decision of 3 November 2026 (the pilot also had an earlier package-specific grant). Complete
-    attributable tokens, costs and billing remain unknown. This metadata refresh performs no new
-    proof build or hosted service preflight.
+      spend_usd: unknown; native helper counters/inclusion and attributable billing unavailable
+      wall_time: not attributed
+      hardware: Historical helper preparation was lightweight and executed no proof tools. Subsequent
+        coordinator checks used at most 12 GiB resident memory, no swap and a two-CPU quota; the recorded
+        memory peak was 685,047,808 bytes. Total research wall time and attributable billing remain unknown.
+  notes: Proof development and previous source/migration reviews predate this packet and retain their
+    exact scopes. The earlier mkcs01 public-instance-visibility failure and its unknown usage remain
+    historical evidence; mkcs02 passed after the explicit Mathlib public import. Native helper/model
+    identity, complete tokens, estimated cost and actual billing are not reconstructed. Requested
+    Astra/high is not observed per-turn runtime identity. Formalization responsibility remains with
+    the named human; current local checks/review do not certify historical experiments or the whole thesis.
 fidelity:
-  divergences: Adapted corrected nonlinear statement, not blanket source certification. The ordered
-    color sum has effective unordered coefficient 2*c2. Weak thresholds guarantee equal value and
-    auxiliary repair, whereas every optimizer is feasible under strict thresholds. The one-color
-    branch removes any restriction on c2. No linear/sequential/quantum theorem or universal necessity
-    statement is advertised. Numerical theorem labels alone are not used to identify the correspondence.
+  divergences: Finite maximum k-colorable vertex-subset QUBO models with explicit binary domains. The
+    original nonlinear ten-component interface is unchanged. The extension adds full jointly optimized
+    binary x,s,t linear maxima, strict linear feasibility, weak value/actual sequential repair, one-color
+    branches and corrected universal value thresholds over all finite graphs. Algorithm12 is an actual
+    two-pass current-state scan with a sound/exhaustive edge list and exhaustive slot list; arbitrary
+    order and repetitions are retained. The nonlinear color product is ordered, so its effective unordered
+    coefficient is2*c2. The same strict nonlinear theorem also has the accepted manuscript-route single-slot-deletion
+    proof. The printed local linear slack-update map remains defective; the linear proof uses canonical
+    lifts and explicitly does not claim to verify that map. No quantum/software/runtime or empirical conclusion
+    is included.
+  source_route: Linear strict proof uses accepted arbitrary-slack score domination and feasible canonical
+    lifts rather than the defective printed local slack map. Sequential results follow the actual current-state
+    two-pass scan. The added strict nonlinear companion follows one-slot deletion and keeps the ordered
+    factor2.
+  layout: Version1 compatibility-port files are replaced by eleven unchanged canonical module copies from
+    the public archive; the original PalomarMkCS proposition bundle is unchanged. New statement wrappers
+    are additional interfaces, not canonical proof edits.
 review:
   status: agent-reviewed
-  reviewers:
-  - Codex (bounded source/statement and compatibility check)
-  notes: 'The recorded prior local proof-input checks passed at their preserved exact source hashes:
-    build, transitive axioms, genuine sandboxed Comparator, and Lean/NanoDa/con-ron. VERIFICATION.json
-    is the unchanged historical receipt, not a newly issued hosted result. Existing source/translation
-    review and migration evidence retain their original scopes. This submission-stage metadata refresh
-    changes no Lean proof or advertised statement and provides no new scientific certification,
-    human peer review, Palomar editorial verdict or registration.'
+  notes: Independent package/interface review returned SATISFACTORY for the unchanged ten-component
+    nonlinear root and fourteen-component extension. No mandatory mathematical or mechanical defect
+    was found. Requested reviewer settings were Astra/high; observed runtime model/effort and native
+    telemetry are unavailable. The reviewer independently compared source definitions, full types,
+    hypotheses, nonvacuity and all 34 input hashes plus every retained step-log hash, using the retained original-source orientation
+    and supplemental original nonlinear text. The reviewer did not execute proof/kernel checks or
+    rebuild checker binaries. MKCS-DOC-01 documentary synchronization is implemented in this successor
+    with independent closure complete; proof/compiler inputs are unchanged. See VERIFICATION.json for exact
+    receipt/review hashes and coverage limits. This is not human peer review, a whole-thesis re-audit,
+    a new rights adjudication, a hosted preflight or a Palomar version 2 service verdict.
 alignment:
   namespace: PalomarMkCS
   statements:
-  - source: Finite nonlinear MkCS QUBO model and its adapted penalty guarantees
+  - source: Registered version1 nonlinear bundle
     lean: PalomarMkCS.solution
     module: Solution
-    status: adapted
-    note: A conjunction of ten reused theorem components, not ten independent research contributions.
-      Exact model and component types are in Challenge.lean. Challenge/Solution comparison remains
-      a separate check.
-acknowledgements: The cited mathematical source authors, original thesis collaborators, Lean/mathlib
-  contributors, and Codex automation. David E. Bernal Neira is the confirmed formalization author
-  and responsible maintainer, with AI assistance disclosed. Source attribution does not imply author
-  endorsement or relicense cited publications.
+    status: unchanged proposition bundle
+    note: The ten named proposition definitions and full Statement conjunction are retained exactly.
+  - source: Chapter9 linear/slack, sequential Algorithm12, threshold qualifications and same-theorem strict
+      nonlinear companion
+    lean: PalomarMkCS.extension_solution
+    module: Solution
+    status: adapted extension interface
+    note: Every component is a complete quantified existing theorem type; see SOURCE-MAPPING.md. No new
+      theorem credit is inferred.
+acknowledgements: The mathematical source authors, original thesis collaborators, Lean/Mathlib contributors
+  and AI-assisted formal development. Bibliographic source authorship is distinct from formalization responsibility;
+  no other source-author endorsement or human peer review is claimed.

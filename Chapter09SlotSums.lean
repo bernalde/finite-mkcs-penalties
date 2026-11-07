@@ -1,10 +1,11 @@
 module
 
-public import MkCSProofs.Slots
+public import Chapter09Slots
 
-/-! Compatibility port of Chapter09SlotSums.lean; exact retained proofs at accepted source pin.
-The completed proof is checked separately from the advertised Challenge. -/
 @[expose] public section
+
+/-! Literal source sums and their exact finite conflict representation.
+The printed color sum is ordered; its factor two is proved, not absorbed silently. -/
 noncomputable section
 open scoped BigOperators
 namespace Chapter09.Source
@@ -15,6 +16,7 @@ theorem flag_binary {n k : ℕ} (S : Finset (Slot n k)) (i : Fin n) (r : Fin k) 
 theorem flag_sq {n k : ℕ} (S : Finset (Slot n k)) (i : Fin n) (r : Fin k) :
     flag S i r ^ 2 = flag S i r := by rcases flag_binary S i r with h|h <;> rw [h] <;> norm_num
 
+def Binary {n k : ℕ} (x : Fin n → Fin k → ℝ) : Prop := ∀ i r, x i r = 0 ∨ x i r = 1
 
 def selected {n k : ℕ} (x : Fin n → Fin k → ℝ) : Finset (Slot n k) := by
   classical
@@ -34,6 +36,7 @@ theorem rowCount_sum_flag {n k : ℕ} (S : Finset (Slot n k)) (i : Fin n) :
     (rowCount S i : ℝ) = ∑ r, flag S i r := by
   simp [rowCount,row,flag,Finset.sum_boole]
 
+def reward {n k : ℕ} (S : Finset (Slot n k)) : ℝ := ∑ i, ∑ r, flag S i r ^ 2
 
 theorem sum_flag_eq_card {n k : ℕ} (S : Finset (Slot n k)) :
     (∑ i, ∑ r, flag S i r) = (S.card : ℝ) := by
@@ -68,6 +71,14 @@ theorem feasible_iff_sourceConstraints {n k : ℕ} (G : Graph n) (S : Finset (Sl
       exact Finset.card_le_one.mp hc r (by simpa [row] using hr) p (by simpa [row] using hp)
   simp only [he,hr,sourceConstraints]
 
+def edgeProducts {n k : ℕ} (G : Graph n) (S : Finset (Slot n k)) : ℝ :=
+  ∑ e ∈ G.edges, ∑ r, flag S e.1 r * flag S e.2 r
+
+def orderedProducts {n k : ℕ} (S : Finset (Slot n k)) : ℝ :=
+  ∑ i, ∑ r, ∑ p, if p ≠ r then flag S i r * flag S i p else 0
+
+def colorProducts {n k : ℕ} (S : Finset (Slot n k)) : ℝ :=
+  ∑ i, ∑ r, ∑ p, if r < p then flag S i r * flag S i p else 0
 
 def pairProducts {n k : ℕ} (P : Finset (Slot n k × Slot n k)) (S : Finset (Slot n k)) : ℝ :=
   ∑ e ∈ P, flag S e.1.1 e.1.2 * flag S e.2.1 e.2.2
@@ -199,10 +210,17 @@ theorem uScore_eq_counts {n k : ℕ} (G : Graph n) (a b : ℝ) (S : Finset (Slot
       b * ∑ i, (rowCount S i : ℝ) * ((rowCount S i : ℝ)-1) / 2 := by
   rw [uScore_eq_products,colorProducts_eq_rows]
 
+def nScore {n k : ℕ} (G : Graph n) (c1 c2 : ℝ) (S : Finset (Slot n k)) : ℝ :=
+  reward S - c1 * edgeProducts G S - c2 * orderedProducts S
 
 theorem nScore_eq_uScore {n k : ℕ} (G : Graph n) (c1 c2 : ℝ) (S : Finset (Slot n k)) :
     nScore G c1 c2 S = uScore G c1 (2*c2) S := by
   rw [nScore,reward_eq_card,orderedProducts_eq_twice,uScore_eq_products]; ring
 
-
 end Chapter09.Source
+#print axioms Chapter09.Source.flag_selected
+#print axioms Chapter09.Source.reward_eq_card
+#print axioms Chapter09.Source.feasible_iff_sourceConstraints
+#print axioms Chapter09.Source.orderedProducts_eq_twice
+#print axioms Chapter09.Source.uScore_eq_counts
+#print axioms Chapter09.Source.nScore_eq_uScore
